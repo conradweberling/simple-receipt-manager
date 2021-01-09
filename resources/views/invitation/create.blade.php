@@ -2,9 +2,9 @@
     <div class="card-header">{{ __('Send Invitation') }}</div>
 
     <div class="card-body">
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+        @if (session('message'))
+            <div class="alert alert-{{ session('success') ? 'success' : 'danger' }}" role="alert">
+                {{ session('message') }}
             </div>
         @endif
         <form method="POST" action="{{ route('invitations') }}">

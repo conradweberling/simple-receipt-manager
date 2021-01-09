@@ -9,7 +9,8 @@ class Invitation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'email','token'];
+    protected $primaryKey = 'email';
+    protected $fillable = ['email', 'user_id','token'];
 
     public function user() {
 
