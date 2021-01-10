@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Events\InvitationSaved;
+use App\Listeners\DeleteInvitation;
+use App\Listeners\SendAcceptedNotification;
 use App\Listeners\SendInvitationNotificaiton;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use App\Listeners\SendWelcomeNotification;
+use App\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -17,7 +19,9 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Registered::class => [
-            SendEmailVerificationNotification::class,
+            SendWelcomeNotification::class,
+            SendAcceptedNotification::class,
+            DeleteInvitation::class
         ],
         InvitationSaved::class => [
             SendInvitationNotificaiton::class

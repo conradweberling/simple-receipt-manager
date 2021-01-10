@@ -142,7 +142,7 @@ class InvitationController extends Controller
     protected function validateInvitation() {
 
         return request()->validate([
-            'email' => 'required|email'
+            'email' => 'required|email|unique:users'
         ]);
 
     }

@@ -7,20 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class InvitationNotification extends Notification
+class WelcomeNotification extends Notification
 {
     use Queueable;
-
-    protected $token;
 
     /**
      * Create a new notification instance.
      *
-     * @param $token
+     * @return void
      */
-    public function __construct($token)
+    public function __construct()
     {
-        $this->token = $token;
+        //
     }
 
     /**
@@ -43,10 +41,9 @@ class InvitationNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(__('Invitation'))
-            ->line(__('You have been invited to use ').config('app.name').'.')
-            ->action(__('Accept invitation'), route('register', [$this->token], true))
-            ->line(__('Have fun!'));
+                    ->subject('Welcome '.$notifiable->name)
+                    ->line('Registration was successfully completed.')
+                    ->line('Thank you for using our application!');
     }
 
     /**
