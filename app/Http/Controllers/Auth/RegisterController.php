@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invitation;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
+use App\Events\Registered;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,33 +39,32 @@ class RegisterController extends Controller
     /**
      * Show the application registration form.
      *
+     * @param $token
+     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\View\View
      */
-    public function showRegistrationForm(Request $request)
+    public function showRegistrationForm($token, Request $request)
     {
-        $request->validate(['token' => 'required']);
+        $invitation = $this->getInvitationByTokenOrFail($token);
 
-        $invitation = $this->getInvitationByTokenOrFail($request->get('token'));
-
-        return view('auth.register', ['email' => $invitation->email]);
+        return view('auth.register', ['email' => $invitation->email, 'token' => $token]);
     }
 
     /**
      * Handle a registration request for the application.
      *
+     * @param $token
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
      */
-    public function register(Request $request)
+    public function register($token, Request $request)
     {
         $this->validator($request->all())->validate();
 
-        $invitation = $this->getInvitationByTokenOrFail($request->post('token'));
-        $invitation->delete();
+        $invitation = $this->getInvitationByTokenOrFail($token);
 
-        event(new Registered($user = $this->create($request->all())));
+        event(new Registered($user = $this->create($request->all()), $invitation));
 
         $this->guard()->login($user);
 
@@ -95,8 +94,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'token' => ['required']
+            'password' => ['required', 'string', 'min:8', 'confirmed']
         ]);
     }
 
