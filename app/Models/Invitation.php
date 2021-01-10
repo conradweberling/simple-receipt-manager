@@ -10,7 +10,17 @@ class Invitation extends Model
     use HasFactory;
 
     protected $primaryKey = 'email';
-    protected $fillable = ['email', 'user_id','token'];
+    public $incrementing = false;
+
+    protected $fillable = [
+        'email',
+        'user_id',
+        'token'
+    ];
+
+    protected $hidden = [
+        'token'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

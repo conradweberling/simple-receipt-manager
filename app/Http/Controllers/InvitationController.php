@@ -28,10 +28,10 @@ class InvitationController extends Controller
      */
     public function index(Request $request) {
 
-        //TODO Show Invitations
+        $invitations = $request->user()->invitations()->get();
 
         return ($request->wantsJson()) ?
-            new JsonResponse([], 200) :
+            new JsonResponse(['items' => $invitations], 200) :
             view('invitation.index');
 
     }
