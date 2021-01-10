@@ -13,9 +13,7 @@
                     <div class="card-header">{{ __('Pending Invitations') }}</div>
 
                     <div class="card-body">
-
-                        ...
-
+                        <invitation-list route="{{route('invitations')}}"></invitation-list>
                     </div>
                 </div>
             </div>
