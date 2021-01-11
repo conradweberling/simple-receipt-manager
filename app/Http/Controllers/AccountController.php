@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AccountDeleted;
+use App\Events\InvitationSaved;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,8 +45,10 @@ class AccountController extends Controller
         $request->validate(['password' => 'required']);
         $user = auth()->user();
 
-        if(!$user->checkPassword($request->get('password')))
+        if(!$user->checkPassword($request->post('password')))
             throw ValidationException::withMessages(['password' => 'Password value is incorrect']);
+
+        event(new AccountDeleted($user->name, $user->email));
 
         $user->delete();
         auth()->guard()->logout();
@@ -68,7 +72,7 @@ class AccountController extends Controller
         $request->validate(['password' => 'required']);
 
         return new JsonResponse(
-            ['success' => auth()->user()->checkPassword($request->get('password'))]
+            ['success' => auth()->user()->checkPassword($request->post('password'))]
             , 200);
 
     }

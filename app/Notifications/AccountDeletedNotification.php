@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AcceptedNotification extends Notification
+class AccountDeletedNotification extends Notification
 {
     use Queueable;
 
-    protected $user;
+    protected $name;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($name)
     {
-        $this->user = $user;
+        $this->name = $name;
     }
 
     /**
@@ -43,9 +43,8 @@ class AcceptedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Invitation accepted')
-                    ->line(ucfirst($this->user->name).' accepted your invitation.')
-                    ->line('Thank you for using our application!');
+                    ->subject('Account was successfully deleted')
+                    ->line('Your account and all your stored data have been permanently deleted.');
     }
 
     /**

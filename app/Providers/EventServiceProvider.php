@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\AccountDeleted;
 use App\Events\InvitationSaved;
 use App\Listeners\DeleteInvitation;
 use App\Listeners\SendAcceptedNotification;
+use App\Listeners\SendAccountDeletedMail;
 use App\Listeners\SendInvitationNotificaiton;
 use App\Listeners\SendWelcomeNotification;
 use App\Events\Registered;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
             SendWelcomeNotification::class,
             SendAcceptedNotification::class,
             DeleteInvitation::class
+        ],
+        AccountDeleted::class => [
+            SendAccountDeletedMail::class
         ],
         InvitationSaved::class => [
             SendInvitationNotificaiton::class
