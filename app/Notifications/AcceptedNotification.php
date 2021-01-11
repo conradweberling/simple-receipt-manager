@@ -44,7 +44,7 @@ class AcceptedNotification extends Notification
     {
         return (new MailMessage)
                     ->subject('Invitation accepted')
-                    ->line(ucfirst($this->user->name).' accepted your invitation.')
+                    ->line($this->user->name.' accepted your invitation.')
                     ->line('Thank you for using our application!');
     }
 
