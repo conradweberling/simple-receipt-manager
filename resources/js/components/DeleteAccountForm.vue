@@ -10,7 +10,7 @@
 
             <div class="form-group row">
 
-                <label for="password" class="col-md-4 col-form-label text-lg-right">Password</label>
+                <label for="password" class="col-md-3 col-form-label text-lg-right">Password</label>
 
                 <div class="col-md-8">
 
@@ -36,7 +36,7 @@
 
             <div class="form-group row mb-0">
 
-                <div class="col-md-8 offset-md-4">
+                <div class="col-md-8 offset-md-3">
                     <b-button @click="checkPasswordAndSubmit()" variant="danger" :disabled="submitDisabled">
                         <b-spinner v-if="loading" class="mr-2" small></b-spinner>
                         Delete account permanently
@@ -110,7 +110,7 @@ export default {
             let metas = document.getElementsByTagName('meta');
 
             for (let i = 0; i < metas.length; i++) {
-                if (metas[i].getAttribute('name') === metaName) {
+                if (metas[i].getAttribute(  'name') === metaName) {
                     return metas[i].getAttribute('content');
                 }
             }
@@ -134,7 +134,7 @@ export default {
             return this.alert.text.length;
         },
         submitDisabled() {
-            return !this.passwordValue.length;
+            return !this.passwordValue.length || this.loading;
         }
     }
 

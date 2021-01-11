@@ -1,12 +1,16 @@
 <div class="card">
-    <div class="card-header">{{ __('Send Invitation') }}</div>
 
     <div class="card-body">
+
+        <h5 class="card-title">{{ __('Send Invitation') }}</h5>
+        <hr>
+
         @if (session('message'))
             <div class="alert alert-{{ session('success') ? 'success' : 'danger' }}" role="alert">
                 {{ session('message') }}
             </div>
         @endif
+
         <form method="POST" action="{{ route('invitations') }}">
             @csrf
 

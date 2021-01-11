@@ -10,9 +10,9 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">{{ __('Pending Invitations') }}</div>
-
                     <div class="card-body">
+                        <h5 class="card-title">{{ __('Pending Invitations') }}</h5>
+                        <hr>
                         <invitation-list route="{{route('invitations')}}"></invitation-list>
                     </div>
                 </div>

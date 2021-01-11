@@ -9,7 +9,7 @@
 
                     <div class="card-body">
 
-                        <h5 class="card-title">{{ __('Delete account') }}</h5>
+                        <h5 class="card-title">{{ __('Delete Account') }}</h5>
 
                         <hr>
 
