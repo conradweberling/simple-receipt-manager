@@ -14,8 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Auth::routes();
+Route::get('/invitations', [App\Http\Controllers\InvitationController::class, 'index'])->name('invitations');
+Route::get('/invitations/create', [App\Http\Controllers\InvitationController::class, 'create'])->name('invitations.create');
+Route::post('/invitations', [App\Http\Controllers\InvitationController::class, 'store'])->name('invitations');
+
+Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])->name('account');
+Route::post('/account/destroy', [App\Http\Controllers\AccountController::class, 'destroy'])->name('account.destroy');
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
@@ -27,17 +33,12 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::post('/password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/password/reset', [ App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
+Route::post('/password/check', [App\Http\Controllers\AccountController::class, 'checkPassword'])->name('password.check');
 Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');
 Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-
 
 Route::get('/register/{token}', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register/{token}', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/invitations', [App\Http\Controllers\InvitationController::class, 'index'])->name('invitations');
-Route::get('/invitations/create', [App\Http\Controllers\InvitationController::class, 'create'])->name('invitations.create');
-Route::post('/invitations', [App\Http\Controllers\InvitationController::class, 'store'])->name('invitations');

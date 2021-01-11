@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -47,6 +48,18 @@ class User extends Authenticatable
     public function invitations() {
 
         return $this->hasMany(Invitation::class);
+
+    }
+
+    /**
+     * Check Password
+     *
+     * @param $hash
+     * @return bool
+     */
+    public function checkPassword($hash) {
+
+        return Hash::check($hash, $this->password);
 
     }
 
