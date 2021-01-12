@@ -86,8 +86,6 @@ export default {
             let self = this;
 
             axios.post(this.check, {
-
-                _token: this.csrfToken,
                 password: this.passwordValue
             })
             .then((response) => {
