@@ -89,7 +89,6 @@ export default {
 
                 _token: this.csrfToken,
                 password: this.passwordValue
-
             })
             .then((response) => {
 
@@ -128,7 +127,7 @@ export default {
     },
     computed: {
         csrfToken() {
-            return this.getMetaTag('csrf-token');
+            return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         },
         incorrectPassword() {
             return this.passwordCorrect === false;
