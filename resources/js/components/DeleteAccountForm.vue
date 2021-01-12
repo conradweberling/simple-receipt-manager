@@ -37,10 +37,16 @@
             <div class="form-group row mb-0">
 
                 <div class="col-md-8 offset-md-3">
-                    <b-button @click="checkPasswordAndSubmit()" variant="danger" :disabled="submitDisabled">
-                        <b-spinner v-if="loading" class="mr-2" small></b-spinner>
-                        Delete account permanently
-                    </b-button>
+                    <b-overlay :show="loading" class="d-inline-block" spinner-small>
+                        <b-button
+                            ref="button"
+                            @click="checkPasswordAndSubmit()"
+                            variant="danger"
+                            :disabled="submitDisabled"
+                        >
+                            Delete account permanently
+                        </b-button>
+                    </b-overlay>
                 </div>
 
             </div>
