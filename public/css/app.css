@@ -10903,4 +10903,9 @@ a.text-dark:focus {
   }
 }
 
+.btn-toggle-nav:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 

@@ -6,3 +6,8 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.btn-toggle-nav:focus {
+    outline: none;
+    box-shadow: none;
+}

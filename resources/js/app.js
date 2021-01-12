@@ -50,4 +50,9 @@ Vue.component('delete-account-form', require('./components/DeleteAccountForm').d
 
 const app = new Vue({
     el: '#app',
+    data() {
+        return {
+            newNotification: true
+        }
+    }
 });
