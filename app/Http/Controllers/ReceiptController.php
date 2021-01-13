@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Receipt;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class ReceiptController extends Controller
@@ -75,7 +74,7 @@ class ReceiptController extends Controller
     protected function createThumbByImage($image_path) {
 
         $thumb = Image::make(storage_path('app/'.$image_path));
-        $thumb->crop(500, 500);
+        $thumb->crop(config('view.thumbnail_width'), config('view.thumbnail_height'));
         $thumb_path = 'images/'.$thumb->filename.'.thumbnail.'.$thumb->extension;
         $thumb->save(storage_path('app/'.$thumb_path));
 

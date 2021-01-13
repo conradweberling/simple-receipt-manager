@@ -33,4 +33,12 @@ return [
         realpath(storage_path('framework/views'))
     ),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Receipt Thumbnails
+    |--------------------------------------------------------------------------
+    */
+    'thumbnail_width' => env('THUMBNAIL_WIDTH', 250),
+    'thumbnail_height' => env('THUMBNAIL_HEIGHT', 250),
+
 ];
