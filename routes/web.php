@@ -23,6 +23,9 @@ Route::post('/invitations', [App\Http\Controllers\InvitationController::class, '
 Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])->name('account');
 Route::post('/account/destroy', [App\Http\Controllers\AccountController::class, 'destroy'])->name('account.destroy');
 
+Route::get('/receipts', [App\Http\Controllers\ReceiptController::class, 'index'])->name('receipts');
+Route::post('/receipts/store', [App\Http\Controllers\ReceiptController::class, 'store'])->name('receipts.store');
+
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

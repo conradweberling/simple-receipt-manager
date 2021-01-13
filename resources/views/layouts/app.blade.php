@@ -70,6 +70,10 @@
                                 Home
                             </b-nav-item>
 
+                            <b-nav-item href="{{route('receipts')}}" {{ request()->is('receipts') ? 'active' : '' }}>
+                                Receipts
+                            </b-nav-item>
+
                             <b-nav-item href="{{route('account')}}" {{ request()->is('account') ? 'active' : '' }}>
                                 Account
                             </b-nav-item>
