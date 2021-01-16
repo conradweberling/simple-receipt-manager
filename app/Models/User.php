@@ -52,6 +52,15 @@ class User extends Authenticatable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function receipts() {
+
+        return $this->hasMany(Receipt::class);
+
+    }
+
+    /**
      * Check Password
      *
      * @param $hash
