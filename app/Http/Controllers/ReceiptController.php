@@ -18,11 +18,18 @@ class ReceiptController extends Controller
     }
 
     /**
+     * Index
      *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('receipt.index');
+
+        return $request->wantsJson() ?
+            Receipt::paginateAndSearch($request->get('q')) :
+            view('receipt.index');
+
     }
 
     /**
@@ -32,9 +39,11 @@ class ReceiptController extends Controller
     public function store(Request $request)
     {
         $this->validateForm($request);
-        $image_path = request('image')->store('images');
+
+        $image_path = $this->storeImage($request);
 
         Receipt::create([
+            'user_id' => $request->user()->id,
             'image' => $image_path,
             'thumbnail' => $this->createThumbByImage($image_path),
             'date' => $request->post('date'),
@@ -66,6 +75,25 @@ class ReceiptController extends Controller
     }
 
     /**
+     * Store image
+     *
+     * @param Request $request
+     * @return string
+     */
+    protected function storeImage(Request $request) {
+
+        $image = Image::make($request->file('image')->getRealpath());
+        $image->orientate();
+        $image_ext = request('image')->getClientOriginalExtension();
+        $image_sub_path = 'images/'.uniqid().'.'.$image_ext;
+        $image_path = storage_path('app/'.$image_sub_path);
+        $image->save($image_path);
+
+        return $image_sub_path;
+
+    }
+
+    /**
      * Generate Thumbnail
      *
      * @param $image_path
@@ -74,7 +102,7 @@ class ReceiptController extends Controller
     protected function createThumbByImage($image_path) {
 
         $thumb = Image::make(storage_path('app/'.$image_path));
-        $thumb->crop(config('view.thumbnail_width'), config('view.thumbnail_height'));
+        $thumb->fit(config('view.thumbnail_width'), config('view.thumbnail_height'));
         $thumb_path = 'images/'.$thumb->filename.'.thumbnail.'.$thumb->extension;
         $thumb->save(storage_path('app/'.$thumb_path));
 
