@@ -17,15 +17,17 @@
                 <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Receipt') }}</label>
 
                 <div class="col-md-6">
-                    <input
+
+                    <b-form-file
                         id="image"
-                        type="file"
-                        class="form-control-file @error('image') is-invalid @enderror"
                         name="image"
-                        value="{{ old('image') }}"
+                        placeholder="Choose a file or drop it here..."
+                        drop-placeholder="Drop file here..."
+                        @if(old('image')) value="{{ old('image') }}" @endif
+                        class="@error('image') is-invalid @enderror"
                         required
                         autofocus
-                    >
+                    ></b-form-file>
 
                     @error('image')
                     <span class="invalid-feedback" role="alert">
@@ -36,7 +38,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Datum') }}</label>
+                <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Date') }}</label>
 
                 <div class="col-md-6">
 
@@ -45,6 +47,9 @@
                         class="mb-2 @error('date') is-invalid @enderror"
                         name="date"
                         value="{{ (old('date')) }}"
+                        today-button
+                        reset-button
+                        close-button
                         required
                     ></b-form-datepicker>
 
