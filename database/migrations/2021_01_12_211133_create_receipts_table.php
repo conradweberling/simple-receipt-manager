@@ -15,11 +15,13 @@ class CreateReceiptsTable extends Migration
     {
         Schema::create('receipts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');;
             $table->string('image');
             $table->string('thumbnail');
             $table->float('amount');
             $table->date('date');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
