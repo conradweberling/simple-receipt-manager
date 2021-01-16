@@ -46,7 +46,7 @@
                             <img :src="base+'/'+receipt.thumbnail" class="img-fluid" alt="Receipt">
                         </a>
 
-                        <b-modal ref="modals" :title="'Receipt from '+receipt.date" hide-footer>
+                        <b-modal :ref="'modal-'+index" :title="'Receipt from '+receipt.date" hide-footer>
                             <img :src="base+'/'+receipt.image" class="img-fluid" alt="Receipt">
                         </b-modal>
 
@@ -131,7 +131,7 @@
         },
         methods: {
             showModal(index) {
-                this.$refs.modals[index].show();
+                this.$refs['modal-'+index][0].show();
             },
             searchButtonClicked() {
 
