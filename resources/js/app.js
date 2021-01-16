@@ -11,22 +11,21 @@ window.Vue = require('vue').default;
 /**
  * Bootstrap Vue
  */
-
 require('./bootstrap');
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 /**
  * Axios
  */
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
 
 /**
  * The following block of code may be used to automatically register your
@@ -41,6 +40,7 @@ Vue.use(VueAxios, axios)
 
 Vue.component('invitation-list', require('./components/InvitationList').default);
 Vue.component('delete-account-form', require('./components/DeleteAccountForm').default);
+Vue.component('receipt-list', require('./components/ReceiptList').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
