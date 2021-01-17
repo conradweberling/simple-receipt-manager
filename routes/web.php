@@ -24,6 +24,7 @@ Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])
 Route::post('/account/destroy', [App\Http\Controllers\AccountController::class, 'destroy'])->name('account.destroy');
 
 Route::get('/receipts', [App\Http\Controllers\ReceiptController::class, 'index'])->name('receipts');
+Route::get('/receipts/create', [App\Http\Controllers\ReceiptController::class, 'create'])->name('receipts.create');
 Route::post('/receipts/store', [App\Http\Controllers\ReceiptController::class, 'store'])->name('receipts.store');
 
 Route::get('/images/{name}', [App\Http\Controllers\ImageController::class, 'index'])->name('images');

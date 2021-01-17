@@ -32,6 +32,18 @@ class ReceiptController extends Controller
 
     }
 
+
+    /**
+     * Create form
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function create() {
+
+        return view('receipt.create');
+
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
