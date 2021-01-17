@@ -5,11 +5,11 @@
         <h5 class="card-title">{{ __('Send Invitation') }}</h5>
         <hr>
 
-        @if (session('message'))
-            <div class="alert alert-{{ session('success') ? 'success' : 'danger' }}" role="alert">
-                {{ session('message') }}
-            </div>
-        @endif
+        <b-alert
+            @if (session('message')) show @endif
+            variant="{{ session('success') ? 'success' : 'danger' }}"
+            dismissible
+        >{{ session('message') }}</b-alert>
 
         <form method="POST" action="{{ route('invitations') }}">
             @csrf

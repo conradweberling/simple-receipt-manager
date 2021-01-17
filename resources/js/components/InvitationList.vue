@@ -2,7 +2,7 @@
 
     <div>
 
-        <b-alert :show="showAlert" :variant="alert.variant">{{ alert.text }}</b-alert>
+        <b-alert :show="showAlert" :variant="alert.variant" dismissible>{{ alert.text }}</b-alert>
 
         <p v-if="!requested">Loading...</p>
 
