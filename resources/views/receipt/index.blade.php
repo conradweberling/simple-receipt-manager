@@ -15,7 +15,11 @@
 
                 <hr class="my-4">
 
-                <receipt-list route="{{route('receipts')}}" base="{{url('/')}}"></receipt-list>
+                <receipt-list
+                    route="{{route('receipts')}}"
+                    base="{{url('/')}}"
+                    destroy="{{route('receipts.destroy', 'replaceid')}}"
+                ></receipt-list>
 
             </div>
         </div>

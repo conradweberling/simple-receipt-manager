@@ -31,7 +31,14 @@ class Receipt extends Model
     public static function paginateAndSearch($q) {
 
         return self
-            ::select('receipts.amount', 'receipts.date', 'users.name', 'receipts.image', 'receipts.thumbnail')
+            ::select(
+                'receipts.id',
+                'receipts.amount',
+                'receipts.date',
+                'users.name',
+                'receipts.image',
+                'receipts.thumbnail'
+            )
             ->join('users', 'users.id', '=', 'receipts.user_id')
             ->where('receipts.amount', 'LIKE', '%'.$q.'%')
             ->orWhere('receipts.date', 'LIKE', '%'.$q.'%')

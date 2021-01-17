@@ -65,8 +65,29 @@ class ReceiptController extends Controller
         return ($request->wantsJson()) ?
             new JsonResponse([], 200) :
             redirect(route('receipts'))->with([
-                'message' => 'Receipt created',
+                'message' => 'Receipt created.',
                 'success' => true
+            ]);
+
+    }
+
+    /**
+     * Destroy receipt
+     *
+     * @param Receipt $receipt
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function destroy(Receipt $receipt, Request $request) {
+
+        $deleted = $receipt->delete();
+
+        return ($request->wantsJson()) ?
+            new JsonResponse([], ($deleted) ? 200 : 500) :
+            redirect(route('receipts'))->with([
+                'message' => 'Receipt '.(($deleted) ? 'permanently ' : 'can\'t').' deleted.',
+                'success' => $deleted ? true : false
             ]);
 
     }

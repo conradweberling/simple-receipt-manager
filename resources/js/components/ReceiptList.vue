@@ -42,7 +42,7 @@
                 <div class="row no-gutters">
                     <div class="col-4 col-lg- 2">
 
-                        <a @click="showModal(index)">
+                        <a @click="showImageModal(index)">
                             <img :src="base+'/'+receipt.thumbnail" class="img-fluid" alt="Receipt">
                         </a>
 
@@ -56,9 +56,42 @@
 
                             <div class="row align-items-start h-25">
                                 <div class="col text-right">
-                                    <button class="btn btn-toggle-nav p-0">
+
+                                    <button class="btn btn-toggle-nav p-0" @click="showConfirmModal(index)">
                                         <b-icon icon="trash" scale="1" variant="danger"></b-icon>
                                     </button>
+
+                                    <b-modal :id="'confirm-'+index" :ref="'confirm-'+index">
+
+                                        Are you sure you want to delete the receipt?
+
+                                        <template #modal-footer>
+
+                                            <b-button
+                                                variant="secondary"
+                                                class="float-right"
+                                                @click="$bvModal.hide('confirm-'+index)"
+                                            >Close
+                                            </b-button>
+
+                                            <form :action="destroy.replace('replaceid', receipt.id)" method="post">
+
+                                                <input name="_token" :value="csrfToken" hidden>
+
+                                                <b-button
+                                                    variant="danger"
+                                                    class="float-right"
+                                                    type="submit"
+                                                    @click="show=false"
+                                                >Delete
+                                                </b-button>
+
+                                            </form>
+
+                                        </template>
+
+                                    </b-modal>
+
                                 </div>
                             </div>
 
@@ -109,6 +142,9 @@
             },
             base: {
                 required: true
+            },
+            destroy: {
+                required: true
             }
         },
         data() {
@@ -130,7 +166,10 @@
             this.getResults();
         },
         methods: {
-            showModal(index) {
+            showConfirmModal(index) {
+                this.$refs['confirm-'+index][0].show();
+            },
+            showImageModal(index) {
                 this.$refs['modal-'+index][0].show();
             },
             searchButtonClicked() {
@@ -169,6 +208,9 @@
             }
         },
         computed: {
+            csrfToken() {
+                return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            },
             nextPage() {
                 return this.currentPage+1;
             },
