@@ -155,6 +155,9 @@
                         this.receipts = this.responseObj.data;
                         (search) ? this.loadingSearch = false : this.loading = false;
 
+                        if(this.error) this.error = false;
+                        if(this.alert.text) this.alert.text = '';
+
                     }).catch(() => {
 
                         this.error = true;
