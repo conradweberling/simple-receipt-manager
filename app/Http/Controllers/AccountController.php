@@ -56,7 +56,8 @@ class AccountController extends Controller
         return $request->wantsJson() ?
             new JsonResponse([], 200) :
             redirect(route('login'))->with([
-                'status' => 'Account permanently deleted.'
+                'message' => 'Account permanently deleted.',
+                'success' => true,
             ]);
 
     }

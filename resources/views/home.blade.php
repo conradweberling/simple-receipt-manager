@@ -10,11 +10,11 @@
                     <h5 class="card-title">{{ __('Dashboard') }}</h5>
                     <hr>
 
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <b-alert
+                        @if (session('message')) show @endif
+                        variant="{{ session('success') ? 'success' : 'danger' }}"
+                        dismissible
+                    >{{ session('message') }}</b-alert>
 
                     {{ __('You are logged in!') }}
                 </div>

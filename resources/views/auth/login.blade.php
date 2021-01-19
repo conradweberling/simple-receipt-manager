@@ -10,11 +10,11 @@
                     <h5 class="card-title">{{ __('Login') }}</h5>
                     <hr>
 
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <b-alert
+                        @if (session('message')) show @endif
+                    variant="{{ session('success') ? 'success' : 'danger' }}"
+                        dismissible
+                    >{{ session('message') }}</b-alert>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

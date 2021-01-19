@@ -71,7 +71,8 @@ class RegisterController extends Controller
         return $request->wantsJson()
             ? new JsonResponse([], 201)
             : redirect($this->redirectPath())->with([
-                'status' => 'Registration was successfully completed.'
+                'message' => 'Registration was successfully completed.',
+                'success' => true,
             ]);
     }
 
