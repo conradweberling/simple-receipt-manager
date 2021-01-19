@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Receipt;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReceiptFactory extends Factory
@@ -22,7 +23,11 @@ class ReceiptFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'image' => "images/dummy1000x1500.png",
+            'thumbnail' => "images/dummy500x850.png",
+            'amount' => $this->faker->randomFloat(2, 1, 100),
+            'date' => $this->faker->dateTimeBetween('-6 month', 'now')
         ];
     }
 }
