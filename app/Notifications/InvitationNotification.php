@@ -11,6 +11,8 @@ class InvitationNotification extends Notification
 {
     use Queueable;
 
+    protected const LANG_PRE = 'notifications.'.self::class.'.';
+
     protected $token;
 
     /**
@@ -43,22 +45,9 @@ class InvitationNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(__('Invitation'))
-            ->line(__('You have been invited to use ').config('app.name').'.')
-            ->action(__('Accept invitation'), route('register', [$this->token], true))
-            ->line(__('Have fun!'));
+            ->subject(__(self::LANG_PRE.'subject'))
+            ->line(__(self::LANG_PRE.'message', ['name' => config('app.name')]))
+            ->action(__(self::LANG_PRE.'button'), route('register', [$this->token], true));
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

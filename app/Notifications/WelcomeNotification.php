@@ -11,6 +11,8 @@ class WelcomeNotification extends Notification
 {
     use Queueable;
 
+    protected const LANG_PRE = 'notifications.'.self::class.'.';
+
     /**
      * Create a new notification instance.
      *
@@ -29,7 +31,7 @@ class WelcomeNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -41,9 +43,8 @@ class WelcomeNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Welcome '.$notifiable->name)
-                    ->line('Registration was successfully completed.')
-                    ->line('Thank you for using our application!');
+            ->subject(__(self::LANG_PRE.'subject', ['name' => $notifiable->name]))
+            ->line(__(self::LANG_PRE.'message'));
     }
 
     /**
@@ -55,7 +56,8 @@ class WelcomeNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'subject' => __(self::LANG_PRE.'subject', ['name' => $notifiable->name]),
+            'message' => __(self::LANG_PRE.'message')
         ];
     }
 }

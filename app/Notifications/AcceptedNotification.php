@@ -11,6 +11,8 @@ class AcceptedNotification extends Notification
 {
     use Queueable;
 
+    protected const LANG_PRE = 'notifications.'.self::class.'.';
+
     protected $user;
 
     /**
@@ -31,7 +33,7 @@ class AcceptedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -43,9 +45,8 @@ class AcceptedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Invitation accepted')
-                    ->line($this->user->name.' accepted your invitation.')
-                    ->line('Thank you for using our application!');
+            ->subject(__(self::LANG_PRE.'subject'))
+            ->line(__(self::LANG_PRE.'message', ['name' => $this->user->name]));
     }
 
     /**
@@ -57,7 +58,8 @@ class AcceptedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'subject' => __(self::LANG_PRE.'subject'),
+            'message' => __(self::LANG_PRE.'message', ['name' => $this->user->name])
         ];
     }
 }

@@ -11,6 +11,8 @@ class AccountDeletedNotification extends Notification
 {
     use Queueable;
 
+    const LANG_PRE = 'notifications.'.self::class.'.';
+
     protected $name;
 
     /**
@@ -43,20 +45,8 @@ class AccountDeletedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Account was successfully deleted')
-                    ->line('Your account and all your stored data have been permanently deleted.');
+            ->subject(__(self::LANG_PRE.'subject'))
+            ->line(__(self::LANG_PRE.'message'));
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

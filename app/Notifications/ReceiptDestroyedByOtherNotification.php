@@ -11,8 +11,10 @@ class ReceiptDestroyedByOtherNotification extends Notification
 {
     use Queueable;
 
-    public $user;
-    public $date;
+    protected const LANG_PRE = 'notifications.'.self::class.'.';
+
+    protected $user;
+    protected $date;
 
     /**
      * Create a new notification instance.
@@ -34,7 +36,7 @@ class ReceiptDestroyedByOtherNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -46,8 +48,8 @@ class ReceiptDestroyedByOtherNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('One of your receipts has been deleted')
-                    ->line('Your receipt from '.$this->date.' was deleted by '.$this->user->name.'.');
+            ->subject( __(self::LANG_PRE.'subject'))
+            ->line(__(self::LANG_PRE.'message', ['date' => $this->date, 'name' => $this->user->name]));
     }
 
     /**
@@ -59,7 +61,8 @@ class ReceiptDestroyedByOtherNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'subject' => __(self::LANG_PRE.'subject'),
+            'message' => __(self::LANG_PRE.'message', ['date' => $this->date, 'name' => $this->user->name])
         ];
     }
 }
