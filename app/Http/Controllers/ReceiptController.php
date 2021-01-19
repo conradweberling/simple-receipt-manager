@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReceiptDestroyed;
 use App\Models\Receipt;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -82,6 +83,8 @@ class ReceiptController extends Controller
     public function destroy(Receipt $receipt, Request $request) {
 
         $deleted = $receipt->delete();
+
+        if($deleted) event(new ReceiptDestroyed($receipt->user_id, $receipt->date, $receipt->amount));
 
         return ($request->wantsJson()) ?
             new JsonResponse([], ($deleted) ? 200 : 500) :

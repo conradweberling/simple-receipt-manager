@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Events\AccountDeleted;
 use App\Events\InvitationSaved;
+use App\Events\ReceiptDestroyed;
 use App\Listeners\DeleteInvitation;
 use App\Listeners\SendAcceptedNotification;
 use App\Listeners\SendAccountDeletedMail;
 use App\Listeners\SendInvitationNotificaiton;
+use App\Listeners\SendReceiptDestroyedByOtherNotification;
 use App\Listeners\SendWelcomeNotification;
 use App\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -30,6 +32,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         InvitationSaved::class => [
             SendInvitationNotificaiton::class
+        ],
+        ReceiptDestroyed::class => [
+            SendReceiptDestroyedByOtherNotification::class
         ]
     ];
 
