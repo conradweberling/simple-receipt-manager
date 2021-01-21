@@ -79,7 +79,7 @@ export default {
     methods: {
 
         formatTime(value) {
-            return moment(value).format("YYYY-MM-DD HH:mm");
+            return moment(value).utc().format("YYYY-MM-DD HH:mm");
         }
 
     },
