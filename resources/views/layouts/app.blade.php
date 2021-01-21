@@ -2,20 +2,57 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 
+    <!-- Charset -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <!-- No index -->
     <meta name="robots" content="noindex">
+
+    <!-- Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="{{ route('laravelpwa.manifest') }}">
+
+    <!-- Chrome for Android theme color -->
+    <meta name="theme-color" content="{{ config('laravelpwa.theme_color') }}">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="{{ config('laravelpwa.display') == 'standalone' ? 'yes' : 'no' }}">
+    <meta name="application-name" content="{{ config('laravelpwa.short_name') }}">
+    <link rel="icon" sizes="512x512" href="{{ asset('/images/icons/receipt-512x512.png') }}">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="{{ config('laravelpwa.display') == 'standalone' ? 'yes' : 'no' }}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{  config('laravelpwa.status_bar') }}">
+    <meta name="apple-mobile-web-app-title" content="{{ config('laravelpwa.short_name') }}">
+    <link rel="apple-touch-icon" href="{{ asset('/images/icons/receipt-512x512.png') }}">
+
+    <!-- Title -->
+    <title>{{ config('app.name') }}</title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- Register SW -->
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('{{url('/sw.js')}}', {
+                scope: '.'
+            }).then(function (registration) {
+                console.log('PWA: ServiceWorker registration successful with scope: ', registration.scope);
+            }, function (err) {
+                console.log('PWA: ServiceWorker registration failed: ', err);
+            });
+        }
+    </script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">

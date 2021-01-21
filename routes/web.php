@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/offline', function () { return view('offline'); })->name('offline');
 
 Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications');
 Route::post('/notifications/update', [App\Http\Controllers\NotificationController::class, 'update'])->name('notifications.update');
