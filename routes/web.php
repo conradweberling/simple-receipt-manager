@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications');
+Route::post('/notifications/update', [App\Http\Controllers\NotificationController::class, 'update'])->name('notifications.update');
+Route::post('/notifications/{notification}/destroy', [App\Http\Controllers\NotificationController::class, 'destroy'])->name('notifications.destroy');
+
 Route::get('/invitations', [App\Http\Controllers\InvitationController::class, 'index'])->name('invitations');
 Route::get('/invitations/create', [App\Http\Controllers\InvitationController::class, 'create'])->name('invitations.create');
 Route::post('/invitations', [App\Http\Controllers\InvitationController::class, 'store'])->name('invitations');

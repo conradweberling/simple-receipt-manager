@@ -41,6 +41,8 @@ Vue.use(VueAxios, axios);
 Vue.component('invitation-list', require('./components/InvitationList').default);
 Vue.component('delete-account-form', require('./components/DeleteAccountForm').default);
 Vue.component('receipt-list', require('./components/ReceiptList').default);
+Vue.component('notification-list', require('./components/NotificationList').default);
+Vue.component('notification-icon', require('./components/NotificationIcon').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -52,7 +54,17 @@ const app = new Vue({
     el: '#app',
     data() {
         return {
-            newNotification: true
+            newNotification: null,
+            visibleNotificationSidebar: false,
+        }
+    },
+    methods: {
+        notificationSidebarShown() {
+            this.newNotification = false;
+            this.visibleNotificationSidebar = true;
+        },
+        notificationSidebarHidden() {
+            this.visibleNotificationSidebar = false;
         }
     }
 });

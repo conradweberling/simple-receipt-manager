@@ -39,18 +39,12 @@
                     @click="newNotification=false"
                     v-b-toggle.sidebar-notifications
                 >
-                    <b-iconstack>
-                        <b-icon stacked icon="bell"></b-icon>
-                        <b-icon
-                            stacked
-                            v-if="newNotification"
-                            icon="exclamation-circle-fill"
-                            variant="danger"
-                            scale="0.75"
-                            shift-h="5"
-                            shift-v="7">
-                        </b-icon>
-                    </b-iconstack>
+
+                    <notification-icon
+                        :default="{{auth()->user()->unreadNotifications->count() ? 'true' : 'false'}}"
+                        :show="newNotification"
+                    ></notification-icon>
+
                 </button>
                 @endauth
 
@@ -59,14 +53,14 @@
 
         @auth
 
-        <b-sidebar id="sidebar-nav" title="Menu" width="400px" backdrop>
+        <b-sidebar id="sidebar-nav" title="Menu" width="600px" backdrop>
 
             <div class="px-3 py-2">
                 <b-navbar>
                     <b-navbar-nav vertical>
                         <div>
 
-                            <b-nav-item href="{{route('home')}}" {{ request()->is('home') ? 'active' : '' }}>
+                            <b-nav-item href="{{route('home')}}" {{ request()->is('/') ? 'active' : '' }}>
                                 Home
                             </b-nav-item>
 
@@ -97,11 +91,24 @@
         </b-sidebar>
 
 
-        <b-sidebar id="sidebar-notifications" title="Notifications" backdrop right>
+        <b-sidebar
+            id="sidebar-notifications"
+            title="Notifications"
+            width="600px"
+            backdrop
+            right
+            @shown="notificationSidebarShown()"
+            @hidden="notificationSidebarHidden()"
+        >
 
             <div class="px-3 py-2">
 
-                <p></p>
+                <notification-list
+                    route="{{route('notifications')}}"
+                    update="{{route('notifications.update')}}"
+                    destroy="{{route('notifications.destroy', ['notification' => 'replaceid'])}}"
+                    :open="visibleNotificationSidebar"
+                ></notification-list>
 
             </div>
 
