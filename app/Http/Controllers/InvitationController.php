@@ -44,7 +44,7 @@ class InvitationController extends Controller
      */
     public function create()
     {
-        return redirect(route('invitations'));
+        return view('invitation.create');
     }
 
     /**

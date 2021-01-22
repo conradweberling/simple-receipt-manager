@@ -1,43 +1,69 @@
-<div class="card">
+@extends('layouts.app')
 
-    <div class="card-body">
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
 
-        <h5 class="card-title">{{ __('Send Invitation') }}</h5>
-        <hr>
+                <div class="card">
 
-        <b-alert
-            @if (session('message')) show @endif
-            variant="{{ session('success') ? 'success' : 'danger' }}"
-            dismissible
-        >{{ session('message') }}</b-alert>
+                    <div class="card-body">
 
-        <form method="POST" action="{{ route('invitations') }}">
-            @csrf
+                        <h5 class="card-title">{{ __('Send Invitation') }}</h5>
+                        <hr>
 
-            <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <b-alert
+                            @if (session('message')) show @endif
+                            variant="{{ session('success') ? 'success' : 'danger' }}"
+                            dismissible
+                        >{{ session('message') }}</b-alert>
 
-                <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                        <form method="POST" action="{{ route('invitations') }}">
+                            @csrf
 
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                            <div class="form-group row">
+                                <label
+                                    for="email"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}
+                                </label>
+
+                                <div class="col-md-6">
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        name="email"
+                                        value="{{ old('email') }}"
+                                        required
+                                        autocomplete="email"
+                                    >
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <loading-button bclass="btn btn-primary" btype="submit">
+                                        {{ __('Send') }}
+                                    </loading-button>
+
+                                    <loading-button bclass="btn btn-secondary" bonclick="window.history.back();">
+                                        {{ __('Cancel') }}
+                                    </loading-button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
+
             </div>
-
-            <hr class="my-4">
-
-            <div class="form-group row mb-0">
-                <div class="col-md-6 offset-md-4">
-                    <loading-button bclass="btn btn-primary" btype="submit">
-                        {{ __('Send') }}
-                    </loading-button>
-                </div>
-            </div>
-
-        </form>
+        </div>
     </div>
-</div>
+@endsection

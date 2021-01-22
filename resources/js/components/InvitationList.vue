@@ -4,31 +4,37 @@
 
         <b-alert :show="showAlert" :variant="alert.variant" dismissible>{{ alert.text }}</b-alert>
 
-        <p v-if="!requested">Loading...</p>
+        <p v-if="noItemsFound" class="text-center">No pending invitations could be found.</p>
 
-        <p v-if="noItemsFound">No pending invitations could be found.</p>
+        <b-overlay :show="!requested">
 
-        <div v-if="items.length" class="overflow-auto">
+            <div v-if="items.length" class="overflow-auto">
 
-            <b-table
-                id="invitations"
-                :items="items"
-                :fields="fields"
-                :per-page="perPage"
-                :current-page="currentPage"
-                small
-                striped
-            ></b-table>
+                <b-table
+                    id="invitations"
+                    :items="items"
+                    :fields="fields"
+                    :per-page="perPage"
+                    :current-page="currentPage"
+                    small
+                    borderless
+                ></b-table>
 
-            <b-pagination
-                v-model="currentPage"
-                :total-rows="rows"
-                :per-page="perPage"
-                align="right"
-                aria-controls="invitations"
-            ></b-pagination>
+                <hr class="my-4">
 
-        </div>
+                <b-pagination
+                    v-model="currentPage"
+                    :total-rows="rows"
+                    :per-page="perPage"
+                    align="center"
+                    aria-controls="invitations"
+                ></b-pagination>
+
+            </div>
+
+        </b-overlay>
+
+
 
     </div>
 
@@ -48,8 +54,17 @@ export default {
             currentPage: 1,
             items: [],
             fields: [
-                { key: 'email', label: 'E-Mail'},
-                { key: 'updated_at', label: 'Time', formatter: "formatTime"}
+                {
+                    key: 'email',
+                    label: 'E-Mail'
+                },
+                {
+                    key: 'updated_at',
+                    label: 'Time',
+                    formatter: (value) => {
+                        return moment(value).utc().format("YYYY-MM-DD HH:mm");
+                    }
+                }
             ],
             alert: {
                 text: '',
@@ -74,13 +89,6 @@ export default {
             this.alert.text = 'Error while loading data!'
 
         });
-
-    },
-    methods: {
-
-        formatTime(value) {
-            return moment(value).utc().format("YYYY-MM-DD HH:mm");
-        }
 
     },
     computed: {

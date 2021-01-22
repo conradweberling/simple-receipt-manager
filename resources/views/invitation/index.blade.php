@@ -5,17 +5,20 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <div class="pb-4">
-                    @include('invitation.create')
-                </div>
+                <b-alert
+                    @if (session('message')) show @endif
+                variant="{{ session('success') ? 'success' : 'danger' }}"
+                    dismissible
+                >{{ session('message') }}</b-alert>
 
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('Pending Invitations') }}</h5>
-                        <hr>
-                        <invitation-list route="{{route('invitations')}}"></invitation-list>
-                    </div>
-                </div>
+                <loading-link bclass="btn btn-primary w-100" bhref="{{ route('invitations.create') }}">
+                    New Invitation
+                </loading-link>
+
+                <hr class="my-4">
+
+                <invitation-list route="{{route('invitations')}}"></invitation-list>
+
             </div>
         </div>
     </div>
