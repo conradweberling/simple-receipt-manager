@@ -3,7 +3,8 @@
   !*** ./resources/js/sw.js ***!
   \****************************/
 var staticCacheName = "pwa-v" + new Date().getTime();
-var filesToCache = ['/srm/public/offline', '/srm/public/css/app.css', '/srm/public/js/app.js', '/srm/public/images/icons/receipt-128x128.png', '/srm/public/images/icons/receipt-512x512.png'];
+var filesToCache = [//TODO change paths
+'/srm/public/offline', '/srm/public/css/app.css', '/srm/public/js/app.js', '/srm/public/images/icons/receipt-128x128.png', '/srm/public/images/icons/receipt-512x512.png'];
 self.addEventListener("install", function (event) {
   event.waitUntil(caches.open(staticCacheName).then(function (cache) {
     return cache.addAll(filesToCache);
