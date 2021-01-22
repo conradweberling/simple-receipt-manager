@@ -2,13 +2,9 @@
 
     <div>
 
-        <b-overlay :show="loadingCreate" class="d-inline-block w-100 mt-2" spinner-small>
-
-            <a :href="create" class="btn btn-primary w-100" @click="loadingCreate=true">Create Receipt</a>
-
-        </b-overlay>
-
-
+        <loading-link bclass="btn btn-primary w-100" :bhref="create">
+            Create Receipt
+        </loading-link>
 
         <hr class="my-4">
 
