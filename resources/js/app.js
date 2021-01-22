@@ -43,6 +43,7 @@ Vue.component('delete-account-form', require('./components/DeleteAccountForm').d
 Vue.component('receipt-list', require('./components/ReceiptList').default);
 Vue.component('notification-list', require('./components/NotificationList').default);
 Vue.component('notification-icon', require('./components/NotificationIcon').default);
+Vue.component('loading-button', require('./components/LoadingButton').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

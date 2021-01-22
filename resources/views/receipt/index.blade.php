@@ -11,13 +11,10 @@
                     dismissible
                 >{{ session('message') }}</b-alert>
 
-                <a href="{{route('receipts.create')}}" class="btn btn-primary w-100">Create Receipt</a>
-
-                <hr class="my-4">
-
                 <receipt-list
                     route="{{route('receipts')}}"
                     base="{{url('/')}}"
+                    create="{{route('receipts.create')}}"
                     destroy="{{route('receipts.destroy', 'replaceid')}}"
                 ></receipt-list>
 

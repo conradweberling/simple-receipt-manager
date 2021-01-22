@@ -93,12 +93,15 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+
+                                    <loading-button bclass="btn btn-primary" btype="submit">
                                         {{ __('Save') }}
-                                    </button>
-                                    <button class="btn btn-secondary" onclick="window.history.back();">
+                                    </loading-button>
+
+                                    <loading-button bclass="btn btn-secondary" bonclick="window.history.back();">
                                         {{ __('Cancel') }}
-                                    </button>
+                                    </loading-button>
+
                                 </div>
                             </div>
                         </form>

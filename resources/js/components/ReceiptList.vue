@@ -2,6 +2,16 @@
 
     <div>
 
+        <b-overlay :show="loadingCreate" class="d-inline-block w-100 mt-2" spinner-small>
+
+            <a :href="create" class="btn btn-primary w-100" @click="loadingCreate=true">Create Receipt</a>
+
+        </b-overlay>
+
+
+
+        <hr class="my-4">
+
         <b-overlay :show="loading">
 
             <div class="form-group row mb-4">
@@ -78,13 +88,17 @@
 
                                                 <input name="_token" :value="csrfToken" hidden>
 
-                                                <b-button
-                                                    variant="danger"
-                                                    class="float-right"
-                                                    type="submit"
-                                                    @click="show=false"
-                                                >Delete
-                                                </b-button>
+                                                <b-overlay :show="loadingConfirm" class="d-inline-block mt-2" spinner-small>
+
+                                                    <b-button
+                                                        variant="danger"
+                                                        class="float-right"
+                                                        type="submit"
+                                                        @click="loadingConfirm=true"
+                                                    >Delete
+                                                    </b-button>
+
+                                                </b-overlay>
 
                                             </form>
 
@@ -145,6 +159,9 @@
             },
             destroy: {
                 required: true
+            },
+            create: {
+                required: true
             }
         },
         data() {
@@ -152,6 +169,8 @@
                 search: '',
                 loading: false,
                 loadingSearch: false,
+                loadingConfirm: false,
+                loadingCreate: false,
                 receipts: {},
                 responseObj: {},
                 currentPage: 1,
