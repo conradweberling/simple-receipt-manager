@@ -57,6 +57,7 @@ const app = new Vue({
         return {
             newNotification: null,
             visibleNotificationSidebar: false,
+            loadingNav: false
         }
     },
     methods: {
@@ -66,6 +67,9 @@ const app = new Vue({
         },
         notificationSidebarHidden() {
             this.visibleNotificationSidebar = false;
+        },
+        clickNavItem() {
+            this.loadingNav = true;
         }
     }
 });

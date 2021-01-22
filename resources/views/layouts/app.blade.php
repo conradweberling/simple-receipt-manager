@@ -93,36 +93,61 @@
         <b-sidebar id="sidebar-nav" title="Menu" width="600px" backdrop>
 
             <div class="px-3 py-2">
-                <b-navbar>
-                    <b-navbar-nav vertical>
-                        <div>
 
-                            <b-nav-item href="{{route('home')}}" {{ request()->is('/') ? 'active' : '' }}>
-                                Home
-                            </b-nav-item>
+                <b-overlay :show="loadingNav">
 
-                            <b-nav-item href="{{route('receipts')}}" {{ request()->is('receipts') ? 'active' : '' }}>
-                                Receipts
-                            </b-nav-item>
+                    <b-navbar>
+                        <b-navbar-nav vertical>
+                            <div>
 
-                            <b-nav-item href="{{route('account')}}" {{ request()->is('account') ? 'active' : '' }}>
-                                Account
-                            </b-nav-item>
+                                <b-nav-item
+                                    href="{{route('home')}}"
+                                    {{ request()->is('/') ? 'active' : '' }}
+                                    @click="clickNavItem()"
+                                >
+                                    Home
+                                </b-nav-item>
 
-                            <b-nav-item href="{{route('invitations')}}" {{ request()->is('invitations') ? 'active' : '' }}>
-                                Invitations
-                            </b-nav-item>
+                                <b-nav-item
+                                    href="{{route('receipts')}}"
+                                    {{ request()->is('receipts') ? 'active' : '' }}
+                                    @click="clickNavItem()"
+                                >
+                                    Receipts
+                                </b-nav-item>
 
-                            <b-nav-item onclick="document.getElementById('logout-form').submit();">
-                                Logout
-                            </b-nav-item>
+                                <b-nav-item
+                                    href="{{route('account')}}"
+                                    {{ request()->is('account') ? 'active' : '' }}
+                                    @click="clickNavItem()"
+                                >
+                                    Account
+                                </b-nav-item>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </b-navbar-nav>
-                </b-navbar>
+                                <b-nav-item
+                                    href="{{route('invitations')}}"
+                                    {{ request()->is('invitations') ? 'active' : '' }}
+                                    @click="clickNavItem()"
+                                >
+                                    Invitations
+                                </b-nav-item>
+
+                                <b-nav-item
+                                    onclick="document.getElementById('logout-form').submit();"
+                                    @click="clickNavItem()"
+                                >
+                                    Logout
+                                </b-nav-item>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </b-navbar-nav>
+                    </b-navbar>
+
+                </b-overlay>
+
             </div>
 
         </b-sidebar>
