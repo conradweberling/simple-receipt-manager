@@ -5,7 +5,8 @@
             :class="bclass"
             :type="btype"
             :onclick="bonclick"
-            @click="loading=true"
+            @click="click()"
+            @submit="submit()"
         >
             <slot></slot>
         </button>
@@ -31,6 +32,22 @@
         data() {
             return {
                 loading: false
+            }
+        },
+        methods: {
+            click() {
+                if(!this.isSubmit) this.handle();
+            },
+            submit() {
+                if(this.isSubmit) this.handle();
+            },
+            handle() {
+                this.loading=true;
+            }
+        },
+        computed: {
+            isSubmit() {
+                return this.btype === "submit";
             }
         }
 
