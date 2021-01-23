@@ -46,7 +46,8 @@ Route::post('/password/email', [App\Http\Controllers\Auth\ForgotPasswordControll
 Route::get('/password/reset', [ App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
 Route::post('/password/check', [App\Http\Controllers\AccountController::class, 'checkPassword'])->name('password.check');
-Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');
+Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.reset');
+Route::post('/password/update', [App\Http\Controllers\AccountController::class, 'updatePassword'])->name('password.update');
 Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
 Route::get('/register/{token}', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');

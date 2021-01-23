@@ -5,6 +5,23 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
+                <div class="card mb-4">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{ __('Change Password') }}</h5>
+
+                        <hr>
+
+                        <account-update-password-form
+                            update="{{route('password.update')}}"
+                            check="{{route('password.check')}}">
+                        </account-update-password-form>
+
+                    </div>
+
+                </div>
+
                 <div class="card">
 
                     <div class="card-body">

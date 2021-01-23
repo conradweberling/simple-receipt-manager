@@ -40,6 +40,7 @@ Vue.use(VueAxios, axios);
 
 Vue.component('invitation-list', require('./components/InvitationList').default);
 Vue.component('delete-account-form', require('./components/DeleteAccountForm').default);
+Vue.component('account-update-password-form', require('./components/AccountUpdatePasswordForm').default);
 Vue.component('receipt-list', require('./components/ReceiptList').default);
 Vue.component('notification-list', require('./components/NotificationList').default);
 Vue.component('notification-icon', require('./components/NotificationIcon').default);

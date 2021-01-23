@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Events\AccountDeleted;
-use App\Events\InvitationSaved;
-use App\Models\User;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AccountController extends Controller
 {
+
+    use ResetsPasswords;
 
     /**
      * AccountController constructor.
@@ -76,6 +75,29 @@ class AccountController extends Controller
         return new JsonResponse(
             ['success' => auth()->user()->checkPassword($request->post('password'))]
             , 200);
+
+    }
+
+    /**
+     * Update password
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updatePassword(Request $request)
+    {
+
+        $request->validate([
+            'password' => 'required|password',
+            'new_password' => 'required|min:8|confirmed',
+            'new_password_confirmation' => 'required'
+        ]);
+
+        $this->resetPassword($request->user(), $request->post('new_password'));
+
+        return new JsonResponse([
+                'success' => true
+            ], 200);
 
     }
 
