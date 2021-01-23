@@ -2,7 +2,7 @@
 
     <div>
 
-        <b-alert :show="showAlert" :variant="alert.variant">{{ alert.text }}</b-alert>
+        <b-alert :show="showAlert" :variant="alert.variant" dismissible>{{ alert.text }}</b-alert>
 
         <form ref="form" :action="action" method="post">
 
@@ -10,9 +10,9 @@
 
             <div class="form-group row">
 
-                <label for="password" class="col-md-3 col-form-label text-lg-right">Password</label>
+                <label for="password" class="col-md-4 col-form-label text-lg-right">Password</label>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
 
                     <input
                         id="password"
@@ -27,7 +27,7 @@
                     >
 
                     <span v-if="incorrectPassword" class="invalid-feedback" role="alert">
-                        <strong>Password not correct</strong>
+                        <strong>Password not correct.</strong>
                     </span>
 
                 </div>
@@ -38,7 +38,7 @@
 
             <div class="form-group row mb-0">
 
-                <div class="col-md-8 offset-md-3">
+                <div class="col-md-8 offset-md-4">
                     <b-overlay :show="loading" class="d-inline-block" spinner-small>
                         <b-button
                             ref="button"
