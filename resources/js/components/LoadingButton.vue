@@ -4,7 +4,6 @@
         <button
             :class="bclass"
             :type="btype"
-            :onclick="bonclick"
             @click="click()"
             @submit="submit()"
         >
@@ -23,9 +22,6 @@
                 default: ""
             },
             btype: {
-                default: ""
-            },
-            bonclick: {
                 default: ""
             }
         },

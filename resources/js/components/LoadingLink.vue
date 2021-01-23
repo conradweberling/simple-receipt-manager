@@ -1,13 +1,12 @@
 <template>
 
-    <b-overlay :show="loading" class="d-inline-block w-100" spinner-small>
-        <a
+    <b-overlay :show="loading" :class="overlayClass" spinner-small>
+        <button
             :class="bclass"
-            :href="bhref"
-            @click="loading=true"
+            @mousedown="click()"
         >
             <slot></slot>
-        </a>
+        </button>
     </b-overlay>
 
 
@@ -22,11 +21,28 @@
             },
             bhref: {
                 default: ""
+            },
+            oclass: {
+                default: ""
             }
         },
         data() {
             return {
                 loading: false
+            }
+        },
+        methods: {
+            click() {
+
+                let self = this;
+                this.loading=true;
+                setTimeout(function(){document.location.href = self.bhref;},250);
+
+            }
+        },
+        computed: {
+            overlayClass() {
+                return 'd-inline-block '+this.oclass;
             }
         }
 

@@ -2,7 +2,7 @@
 
     <div>
 
-        <loading-link bclass="btn btn-primary w-100" :bhref="create">
+        <loading-link bclass="btn btn-primary w-100" :bhref="create" oclass="w-100">
             Create Receipt
         </loading-link>
 

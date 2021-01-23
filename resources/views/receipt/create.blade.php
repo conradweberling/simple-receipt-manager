@@ -98,9 +98,9 @@
                                         {{ __('Save') }}
                                     </loading-button>
 
-                                    <loading-button bclass="btn btn-secondary" bonclick="window.history.back();">
+                                    <loading-link bclass="btn btn-secondary" bhref="{{ route('receipts') }}">
                                         {{ __('Cancel') }}
-                                    </loading-button>
+                                    </loading-link>
 
                                 </div>
                             </div>

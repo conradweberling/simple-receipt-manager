@@ -53,9 +53,10 @@
                                         {{ __('Send') }}
                                     </loading-button>
 
-                                    <loading-button bclass="btn btn-secondary" bonclick="window.history.back();">
+                                    <loading-link bclass="btn btn-secondary" bhref="{{ route('invitations') }}">
                                         {{ __('Cancel') }}
-                                    </loading-button>
+                                    </loading-link>
+
                                 </div>
                             </div>
 
