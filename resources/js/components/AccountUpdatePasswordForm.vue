@@ -6,7 +6,7 @@
 
         <div class="form-group row">
 
-            <label for="rpassword" class="col-md-4 col-form-label text-lg-right">Old password</label>
+            <label for="rpassword" class="col-md-4 col-form-label text-lg-right">Current Password</label>
 
             <div class="col-md-6">
 
@@ -35,7 +35,7 @@
 
         <div class="form-group row">
 
-            <label for="new_password" class="col-md-4 col-form-label text-lg-right">New password</label>
+            <label for="new_password" class="col-md-4 col-form-label text-lg-right">New Password</label>
 
             <div class="col-md-6">
 
@@ -61,7 +61,7 @@
 
         <div class="form-group row">
 
-            <label for="new_password_confirmation" class="col-md-4 col-form-label text-lg-right">Repeat password</label>
+            <label for="new_password_confirmation" class="col-md-4 col-form-label text-lg-right">Confirm New Password</label>
 
             <div class="col-md-6">
 
@@ -97,7 +97,7 @@
                         :disabled="!formValid"
                         @click="updatePassword()"
                     >
-                        Change password
+                        Change Password
                     </b-button>
                 </b-overlay>
             </div>

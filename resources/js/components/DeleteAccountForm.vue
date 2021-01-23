@@ -46,7 +46,7 @@
                             variant="danger"
                             :disabled="submitDisabled"
                         >
-                            Delete account permanently
+                            Delete Account
                         </b-button>
                     </b-overlay>
                 </div>
