@@ -72,17 +72,22 @@
                                 <label for="amount" class="col-md-4 col-form-label text-md-right">{{ __('Amount') }}</label>
 
                                 <div class="col-md-6">
-                                    <input
-                                        id="amount"
-                                        type="number"
-                                        min="0.00"
-                                        max="1000.00"
-                                        step="0.01"
-                                        class="form-control @error('amount') is-invalid @enderror"
-                                        name="amount"
-                                        value="{{ (old('amount')) }}"
-                                        required
-                                    >
+                                    <div class="input-group">
+                                        <input
+                                            id="amount"
+                                            type="number"
+                                            min="0.00"
+                                            max="1000.00"
+                                            step="0.01"
+                                            class="form-control @error('amount') is-invalid @enderror"
+                                            name="amount"
+                                            value="{{ (old('amount')) }}"
+                                            required
+                                        >
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="test">€</span>
+                                        </div>
+                                    </div>
 
                                     @error('amount')
                                     <span class="invalid-feedback" role="alert">
