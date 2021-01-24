@@ -72,7 +72,7 @@ const app = new Vue({
         },
         clickNavItem(href) {
             this.loadingNav = true;
-            setTimeout(function(){document.location.href = href;},250);
+            setTimeout(function(){document.location.href = href;},50);
         },
         logoutNav() {
             this.loadingNav = true;

@@ -36,7 +36,7 @@
 
                 let self = this;
                 this.loading=true;
-                setTimeout(function(){document.location.href = self.bhref;},250);
+                setTimeout(function(){document.location.href = self.bhref;},50);
 
             }
         },

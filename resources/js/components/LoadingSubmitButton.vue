@@ -38,7 +38,7 @@
 
                 if(form.checkValidity()) {
                     this.loading = true;
-                    setTimeout(function(){form.submit();},250);
+                    setTimeout(function(){form.submit();},50);
                 }
 
             }
