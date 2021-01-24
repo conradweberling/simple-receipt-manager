@@ -104,32 +104,32 @@
                                     {{ request()->is('/') ? 'active' : '' }}
                                     @mousedown="clickNavItem('{{route('home')}}')"
                                 >
-                                    Home
+                                    <h5 class="mb-3"><b-icon icon="bar-chart" class="mr-3" scale="1.5"></b-icon>Dashboard</h5>
                                 </b-nav-item>
 
                                 <b-nav-item
                                     {{ request()->is('receipts') ? 'active' : '' }}
                                     @mousedown="clickNavItem('{{route('receipts')}}')"
                                 >
-                                    Receipts
+                                    <h5 class="mb-3"><b-icon icon="receipt" class="mr-3" scale="1.5"></b-icon>Receipts</h5>
                                 </b-nav-item>
 
                                 <b-nav-item
                                     {{ request()->is('account') ? 'active' : '' }}
                                     @mousedown="clickNavItem('{{route('account')}}')"
                                 >
-                                    Account
+                                    <h5 class="mb-3"><b-icon icon="person" class="mr-3" scale="1.5"></b-icon>Account</h5>
                                 </b-nav-item>
 
                                 <b-nav-item
                                     {{ request()->is('invitations') ? 'active' : '' }}
                                     @mousedown="clickNavItem('{{route('invitations')}}')"
                                 >
-                                    Invitations
+                                    <h5 class="mb-3"><b-icon icon="envelope" class="mr-3" scale="1.5"></b-icon>Invitations</h5>
                                 </b-nav-item>
 
                                 <b-nav-item @click="logoutNav()">
-                                    Logout
+                                    <h5 class="mb-3"><b-icon icon="box-arrow-right" class="mr-3" scale="1.5"></b-icon>Logout</h5>
                                 </b-nav-item>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
