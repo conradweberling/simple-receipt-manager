@@ -44,7 +44,7 @@ Vue.component('account-update-password-form', require('./components/AccountUpdat
 Vue.component('receipt-list', require('./components/ReceiptList').default);
 Vue.component('notification-list', require('./components/NotificationList').default);
 Vue.component('notification-icon', require('./components/NotificationIcon').default);
-Vue.component('loading-button', require('./components/LoadingButton').default);
+Vue.component('loading-submit-button', require('./components/LoadingSubmitButton').default);
 Vue.component('loading-link', require('./components/LoadingLink').default);
 
 /**

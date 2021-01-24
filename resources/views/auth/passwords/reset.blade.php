@@ -10,7 +10,7 @@
                     <h5 class="card-title">{{ __('Reset Password') }}</h5>
                     <hr>
 
-                    <form method="POST" action="{{ route('password.reset') }}">
+                    <form id="reset" method="POST" action="{{ route('password.reset.post') }}">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
@@ -55,9 +55,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <loading-button bclass="btn btn-primary" btype="submit">
+                                <loading-submit-button bclass="btn btn-primary" bform="reset">
                                     {{ __('Reset Password') }}
-                                </loading-button>
+                                </loading-submit-button>
                             </div>
                         </div>
                     </form>

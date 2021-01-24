@@ -17,7 +17,7 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="{{ route('receipts.store') }}" enctype="multipart/form-data">
+                        <form id="receipt-create" method="POST" action="{{ route('receipts.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -94,9 +94,9 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
 
-                                    <loading-button bclass="btn btn-primary" btype="submit">
+                                    <loading-submit-button bclass="btn btn-primary" bform="receipt-create">
                                         {{ __('Save') }}
-                                    </loading-button>
+                                    </loading-submit-button>
 
                                     <loading-link bclass="btn btn-secondary" bhref="{{ route('receipts') }}">
                                         {{ __('Cancel') }}

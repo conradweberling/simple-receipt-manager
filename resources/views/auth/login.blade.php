@@ -16,7 +16,7 @@
                         dismissible
                     >{{ session('message') }}</b-alert>
 
-                    <form method="POST" action="{{ route('login') }}">
+                    <form id="login" method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -62,9 +62,9 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
 
-                                <loading-button bclass="btn btn-primary" btype="submit">
+                                <loading-submit-button bclass="btn btn-primary" bform="login">
                                     {{ __('Login') }}
-                                </loading-button>
+                                </loading-submit-button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">

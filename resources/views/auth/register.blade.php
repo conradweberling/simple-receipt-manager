@@ -11,7 +11,7 @@
                     <h5 class="card-title">{{ __('Register') }}</h5>
                     <hr>
 
-                    <form method="POST" action="{{ route('register', [$token]) }}">
+                    <form id="register" method="POST" action="{{ route('register', [$token]) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -85,9 +85,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <loading-button bclass="btn btn-primary" btype="submit">
+                                <loading-submit-button bclass="btn btn-primary" bform="register">
                                     {{ __('Register') }}
-                                </loading-button>
+                                </loading-submit-button>
                             </div>
                         </div>
                     </form>

@@ -80,21 +80,17 @@
                                             >Close
                                             </b-button>
 
-                                            <form :action="destroy.replace('replaceid', receipt.id)" method="post">
+                                            <form :id="'destroy-receipt-'+index" :action="destroy.replace('replaceid', receipt.id)" method="post">
 
                                                 <input name="_token" :value="csrfToken" hidden>
 
-                                                <b-overlay :show="loadingConfirm" class="d-inline-block mt-2" spinner-small>
-
-                                                    <b-button
-                                                        variant="danger"
-                                                        class="float-right"
-                                                        type="submit"
-                                                        @click="loadingConfirm=true"
-                                                    >Delete
-                                                    </b-button>
-
-                                                </b-overlay>
+                                                <loading-submit-button
+                                                    bclass="btn btn-danger float-right"
+                                                    oclass="mt-2"
+                                                    :bform="'destroy-receipt-'+index"
+                                                >
+                                                    Delete
+                                                </loading-submit-button>
 
                                             </form>
 
@@ -165,7 +161,6 @@
                 search: '',
                 loading: false,
                 loadingSearch: false,
-                loadingConfirm: false,
                 loadingCreate: false,
                 receipts: {},
                 responseObj: {},

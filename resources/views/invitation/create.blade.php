@@ -18,7 +18,7 @@
                             dismissible
                         >{{ session('message') }}</b-alert>
 
-                        <form method="POST" action="{{ route('invitations') }}">
+                        <form id="create-invitation" method="POST" action="{{ route('invitations') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -49,9 +49,9 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <loading-button bclass="btn btn-primary" btype="submit">
+                                    <loading-submit-button bclass="btn btn-primary" bform="create-invitation">
                                         {{ __('Send') }}
-                                    </loading-button>
+                                    </loading-submit-button>
 
                                     <loading-link bclass="btn btn-secondary" bhref="{{ route('invitations') }}">
                                         {{ __('Cancel') }}
