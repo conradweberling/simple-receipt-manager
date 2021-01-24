@@ -101,41 +101,34 @@
                             <div>
 
                                 <b-nav-item
-                                    href="{{route('home')}}"
                                     {{ request()->is('/') ? 'active' : '' }}
-                                    @click="clickNavItem()"
+                                    @mousedown="clickNavItem('{{route('home')}}')"
                                 >
                                     Home
                                 </b-nav-item>
 
                                 <b-nav-item
-                                    href="{{route('receipts')}}"
                                     {{ request()->is('receipts') ? 'active' : '' }}
-                                    @click="clickNavItem()"
+                                    @mousedown="clickNavItem('{{route('receipts')}}')"
                                 >
                                     Receipts
                                 </b-nav-item>
 
                                 <b-nav-item
-                                    href="{{route('account')}}"
                                     {{ request()->is('account') ? 'active' : '' }}
-                                    @click="clickNavItem()"
+                                    @mousedown="clickNavItem('{{route('account')}}')"
                                 >
                                     Account
                                 </b-nav-item>
 
                                 <b-nav-item
-                                    href="{{route('invitations')}}"
                                     {{ request()->is('invitations') ? 'active' : '' }}
-                                    @click="clickNavItem()"
+                                    @mousedown="clickNavItem('{{route('invitations')}}')"
                                 >
                                     Invitations
                                 </b-nav-item>
 
-                                <b-nav-item
-                                    onclick="document.getElementById('logout-form').submit();"
-                                    @click="clickNavItem()"
-                                >
+                                <b-nav-item @click="logoutNav()">
                                     Logout
                                 </b-nav-item>
 

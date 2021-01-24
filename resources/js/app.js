@@ -70,8 +70,15 @@ const app = new Vue({
         notificationSidebarHidden() {
             this.visibleNotificationSidebar = false;
         },
-        clickNavItem() {
+        clickNavItem(href) {
             this.loadingNav = true;
+            setTimeout(function(){document.location.href = href;},250);
+        },
+        logoutNav() {
+            this.loadingNav = true;
+            setTimeout(function(){
+                document.getElementById('logout-form').submit();
+            },250);
         }
     }
 });
