@@ -104,7 +104,9 @@
 
                             <div class="row align-items-center h-50">
                                 <div class="col text-center">
-                                    <div class="display-4 display-4-sm">{{receipt.amount}}€</div>
+                                    <div class="display-4 display-4-sm">
+                                        {{receipt.amount.toString().replace('.', ',')}}€
+                                    </div>
                                     <small class="text-muted">paid by {{receipt.name}} on {{receipt.date}}</small>
                                 </div>
                             </div>

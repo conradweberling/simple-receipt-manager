@@ -106,7 +106,7 @@ class ReceiptController extends Controller
         $request->validate([
             'image' => 'required|mimes:jpeg,png',
             'date'  => 'required|date',
-            'amount' => 'required'
+            'amount' => 'required|regex:/^\d+(\.\d{1,2})?$/'
         ]);
 
     }

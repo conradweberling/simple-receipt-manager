@@ -74,7 +74,10 @@
                                 <div class="col-md-6">
                                     <input
                                         id="amount"
-                                        type="text"
+                                        type="number"
+                                        min="0.00"
+                                        max="1000.00"
+                                        step="0.01"
                                         class="form-control @error('amount') is-invalid @enderror"
                                         name="amount"
                                         value="{{ (old('amount')) }}"
