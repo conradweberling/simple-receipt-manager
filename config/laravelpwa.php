@@ -5,7 +5,7 @@ return [
     'manifest' => [
         'name' => env('APP_NAME', 'SimpleReceiptManager'),
         'short_name' => 'SRM',
-        'start_url' => url('/').'/',
+        'start_url' => env('APP_URL').'/',
         'background_color' => '#ffffff',
         'theme_color' => '#ffffff',
         'display' => 'standalone',
@@ -13,11 +13,11 @@ return [
         'status_bar'=> '#ffffff',
         'icons' => [
             '128x128' => [
-                'path' => asset('/images/icons/receipt-128x128.png'),
+                'path' => env('APP_URL').'/images/icons/receipt-128x128.png',
                 'purpose' => 'any'
             ],
             '512x512' => [
-                'path' => asset('/images/icons/receipt-512x512.png'),
+                'path' => env('APP_URL').'/images/icons/receipt-512x512.png',
                 'purpose' => 'any'
             ],
         ],
