@@ -40,8 +40,8 @@
     <!-- Register SW -->
     <script type="text/javascript">
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('{{url('/sw.js')}}', {
-                scope: '.'
+            navigator.serviceWorker.register('{{ url('/sw.js') }}', {
+                scope: '{{ url('/') }}/'
             }).then(function (registration) {
                 console.log('PWA: ServiceWorker registration successful with scope: ', registration.scope);
             }, function (err) {
