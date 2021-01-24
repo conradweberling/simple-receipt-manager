@@ -83,6 +83,9 @@ class ReceiptController extends Controller
      */
     public function destroy(Receipt $receipt, Request $request) {
 
+        $files = [storage_path('app/'.$receipt->image), storage_path('app/'.$receipt->thumbnail)];
+        foreach ($files as $file) if(is_file($file) AND strpos($file, 'dummy') === false) unlink($file);
+
         $deleted = $receipt->delete();
 
         if($deleted) event(new ReceiptDestroyed($receipt->user_id, $receipt->date, $receipt->amount));
