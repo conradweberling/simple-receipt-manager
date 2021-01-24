@@ -36,6 +36,7 @@
                                         value="{{ old('email') }}"
                                         required
                                         autocomplete="email"
+                                        autofocus
                                     >
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
