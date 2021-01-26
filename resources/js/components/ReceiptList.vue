@@ -199,7 +199,10 @@
                     this.loading = true;
                 }
 
-                this.axios.get(this.route + '?page=' + page + '&q=' + this.search)
+                this.axios.get(
+                        this.route +
+                        '?page=' + page +
+                        '&q=' + this.search.replace(',', '.').replace('€', ''))
                     .then(response => {
 
                         this.responseObj = response.data;
@@ -211,8 +214,11 @@
 
                     }).catch(() => {
 
-                        this.error = true;
-                        this.alert.text = 'Error while loading data!';
+                        if(!search) {
+                            this.error = true;
+                            this.alert.text = 'Error while loading data!';
+                        }
+
                         (search) ? this.loadingSearch = false : this.loading = false;
 
                     });
