@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReceiptCreated;
 use App\Events\ReceiptDestroyed;
 use App\Models\Receipt;
 use Illuminate\Http\JsonResponse;
@@ -64,6 +65,8 @@ class ReceiptController extends Controller
             'amount' => $request->post('amount')
         ]);
 
+        event(new ReceiptCreated($request->user()->id, $request->post('date'), $request->post('amount')));
+
         return ($request->wantsJson()) ?
             new JsonResponse([], 200) :
             redirect(route('receipts'))->with([
@@ -81,7 +84,8 @@ class ReceiptController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Receipt $receipt, Request $request) {
+    public function destroy(Receipt $receipt, Request $request)
+    {
 
         $files = [storage_path('app/'.$receipt->image), storage_path('app/'.$receipt->thumbnail)];
         foreach ($files as $file) if(is_file($file) AND strpos($file, 'dummy') === false) unlink($file);
@@ -104,7 +108,8 @@ class ReceiptController extends Controller
      *
      * @param Request $request
      */
-    protected function validateForm(Request $request) {
+    protected function validateForm(Request $request)
+    {
 
         $request->validate([
             'image' => 'required|mimes:jpeg,png',
@@ -120,7 +125,8 @@ class ReceiptController extends Controller
      * @param Request $request
      * @return string
      */
-    protected function storeImage(Request $request) {
+    protected function storeImage(Request $request)
+    {
 
         $image = Image::make($request->file('image')->getRealpath());
         $image->orientate();
@@ -139,7 +145,8 @@ class ReceiptController extends Controller
      * @param $image_path
      * @return string
      */
-    protected function createThumbByImage($image_path) {
+    protected function createThumbByImage($image_path)
+    {
 
         $thumb = Image::make(storage_path('app/'.$image_path));
         $thumb->fit(config('view.thumbnail_width'), config('view.thumbnail_height'));

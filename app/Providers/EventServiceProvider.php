@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\AccountDeleted;
 use App\Events\InvitationSaved;
+use App\Events\ReceiptCreated;
 use App\Events\ReceiptDestroyed;
 use App\Listeners\DeleteInvitation;
+use App\Listeners\DeleteReceiptCache;
 use App\Listeners\SendAcceptedNotification;
 use App\Listeners\SendAccountDeletedMail;
 use App\Listeners\SendInvitationNotificaiton;
@@ -34,7 +36,11 @@ class EventServiceProvider extends ServiceProvider
             SendInvitationNotificaiton::class
         ],
         ReceiptDestroyed::class => [
-            SendReceiptDestroyedByOtherNotification::class
+            SendReceiptDestroyedByOtherNotification::class,
+            DeleteReceiptCache::class
+        ],
+        ReceiptCreated::class => [
+            DeleteReceiptCache::class
         ]
     ];
 
