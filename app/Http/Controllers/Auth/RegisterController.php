@@ -7,6 +7,7 @@ use App\Models\Invitation;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Events\Registered;
+use Faker\Factory;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -113,6 +114,7 @@ class RegisterController extends Controller
             'name' => ucfirst($data['name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'color' => Factory::create()->hexColor
         ]);
     }
 
