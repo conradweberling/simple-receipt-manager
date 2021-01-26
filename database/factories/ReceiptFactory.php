@@ -23,7 +23,7 @@ class ReceiptFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::randomUserId(),
             'image' => "images/dummy1000x1500.png",
             'thumbnail' => "images/dummy500x850.png",
             'amount' => $this->faker->randomFloat(2, 1, 100),

@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'color'
     ];
 
     /**
@@ -68,6 +69,21 @@ class User extends Authenticatable
     public function checkPassword($hash) {
 
         return Hash::check($hash, $this->password);
+
+    }
+
+    /**
+     * Get random user id
+     *
+     * @return |null
+     */
+    public static function randomUserId() {
+
+        $ids_raw = User::select('id')->get();
+        if(!$ids_raw) return null;
+
+        $ids = $ids_raw->pluck('id')->all();
+        return $ids[array_rand($ids)];
 
     }
 
