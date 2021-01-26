@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
+
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -14,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 Route::get('/offline', function () { return view('offline'); })->name('offline');
+
+Route::get('/dashboard/chart', [App\Http\Controllers\DashboardController::class, 'chart'])->name('dashboard.chart');
 
 Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications');
 Route::post('/notifications/update', [App\Http\Controllers\NotificationController::class, 'update'])->name('notifications.update');

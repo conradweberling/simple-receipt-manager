@@ -46,6 +46,8 @@ Vue.component('notification-list', require('./components/NotificationList').defa
 Vue.component('notification-icon', require('./components/NotificationIcon').default);
 Vue.component('loading-submit-button', require('./components/LoadingSubmitButton').default);
 Vue.component('loading-link', require('./components/LoadingLink').default);
+Vue.component('doughnut-chart', require('./components/DoughnutChart').default);
+Vue.component('dashboard', require('./components/Dashboard').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
