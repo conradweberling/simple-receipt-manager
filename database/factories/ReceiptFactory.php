@@ -26,8 +26,8 @@ class ReceiptFactory extends Factory
             'user_id' => User::randomUserId(),
             'image' => "images/dummy1000x1500.png",
             'thumbnail' => "images/dummy500x850.png",
-            'amount' => $this->faker->randomFloat(2, 1, 100),
-            'date' => $this->faker->dateTimeBetween('-6 month', 'now')
+            'amount' => $this->faker->randomFloat(2, 1, 50),
+            'date' => $this->faker->dateTimeBetween('-24 month', 'now')
         ];
     }
 }
