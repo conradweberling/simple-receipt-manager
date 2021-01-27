@@ -81,7 +81,7 @@
                 current: 0,
                 page: 1,
                 perPage: 6,
-                loaded: false,
+                loaded: null,
                 currentData: {},
                 data: [
                     {
@@ -156,11 +156,17 @@
                             this.loaded = true;
 
                         }
+
+                        this.loaded = false;
                         this.$emit('loading', false)
+
+                    }).catch(() => {
+
+                        this.loaded = false;
 
                     });
 
-                if(!this.loaded) {
+                if(this.loaded === false) {
 
                     setTimeout(function() {
                         self.currentData = {
