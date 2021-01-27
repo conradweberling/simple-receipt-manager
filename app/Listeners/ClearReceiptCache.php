@@ -6,7 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Queue\InteractsWithQueue;
 
-class DeleteReceiptCache
+class ClearReceiptCache
 {
     /**
      * Create the event listener.
