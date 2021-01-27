@@ -1,12 +1,17 @@
 <template>
 
-    <div>
+    <div ontouchstart="">
 
         <div class="row mb-4 mt-2">
 
             <div class="col-2">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-toggle-nav p-0" @click="clickedLeft()" :disabled="disabledLeft">
+                    <button
+                        ref="left"
+                        class="btn btn-dashboard p-0 w-100 h-100"
+                        @click="clickedLeft()"
+                        :disabled="disabledLeft"
+                    >
                         <b-icon icon="chevron-left" scale="1.25"></b-icon>
                     </button>
                 </div>
@@ -16,7 +21,11 @@
             </div>
             <div class="col-2">
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-toggle-nav p-0" @click="clickedRight()" :disabled="disabledRight">
+                    <button
+                        ref="right" class="btn btn-dashboard p-0 w-100 h-100"
+                        @click="clickedRight()"
+                        :disabled="disabledRight"
+                    >
                         <b-icon icon="chevron-right" scale="1.25"></b-icon>
                     </button>
                 </div>
@@ -91,9 +100,17 @@
         },
         methods:  {
             clickedRight() {
+
+                let self = this;
+                setTimeout(function(){self.$refs.right.blur();},50);
+
                 if(!this.disabledRight) this.selected--;
             },
             clickedLeft() {
+
+                let self = this;
+                setTimeout(function(){self.$refs.left.blur();},50);
+
                 if(!this.disabledLeft) {
                     let new_selected = this.selected + 1;
                     if(this.data[new_selected] === undefined) {

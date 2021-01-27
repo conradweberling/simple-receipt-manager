@@ -10908,4 +10908,10 @@ a.text-dark:focus {
   box-shadow: none;
 }
 
+.btn-dashboard:focus {
+  outline: none;
+  box-shadow: none;
+  opacity: 0.3 !important;
+}
+
 
