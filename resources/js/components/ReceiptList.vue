@@ -69,7 +69,7 @@
 
                                     <b-modal :id="'confirm-'+index" :ref="'confirm-'+index">
 
-                                        Are you sure you want to delete the receipt?
+                                        Are you sure you want to delete this receipt permanently?
 
                                         <template #modal-footer>
 
