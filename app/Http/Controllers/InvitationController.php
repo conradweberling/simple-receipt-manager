@@ -81,7 +81,15 @@ class InvitationController extends Controller
      * @param Invitation $invitation
      * @return \Illuminate\Contracts\Foundation\Application|JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, Invitation $invitation) {
+    protected function update(Request $request, Invitation $invitation) {
+
+        if($invitation->user_id !== $request->user()->id)
+            return ($request->wantsJson()) ?
+                new JsonResponse([], 409) :
+                redirect(route('invitations'))->with([
+                    'message' => 'This email has already been invited by another user.',
+                    'success' => false
+                ]);
 
         if(($minutes = Carbon::now()->diffInMinutes($invitation->updated_at)) < config('mail.invitation_timeout'))
             return $this->timeout($request, $minutes);
