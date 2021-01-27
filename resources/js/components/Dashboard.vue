@@ -38,7 +38,7 @@
             :chartData="getChartData(currentData.amounts, currentData.colors)"
         ></doughnut-chart>
 
-        <div class="mt-5 mx-1" v-if="loaded">
+        <div class="mt-5 mx-1" v-if="loaded === true">
             <div class="row h-100 m-0 mb-2 align-items-center" v-for="(name, index) in currentData.names">
 
                 <div class="col-4 p-0">
@@ -155,9 +155,12 @@
 
                             this.loaded = true;
 
-                        }
+                        } else {
 
-                        this.loaded = false;
+                            this.loaded = false;
+
+                        }
+                        
                         this.$emit('loading', false)
 
                     }).catch(() => {
