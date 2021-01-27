@@ -30,7 +30,12 @@
 
                         <hr>
 
-                        {{ \Faker\Factory::create()->text }}
+                        <p>
+                            When an account is deleted, all associated receipts and invitations are
+                            <strong>permanently deleted</strong>.
+                            It is not possible to restore the data.
+                        </p>
+
 
                         <hr>
 
