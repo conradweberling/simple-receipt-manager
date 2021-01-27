@@ -37,7 +37,11 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <loading-submit-button bclass="btn btn-primary" bform="reset">
+                                <loading-submit-button
+                                    bclass="btn btn-primary"
+                                    bform="reset"
+                                    @loading="handleContentLoading"
+                                >
                                     {{ __('Send Password Reset Link') }}
                                 </loading-submit-button>
                             </div>

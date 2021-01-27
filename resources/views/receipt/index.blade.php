@@ -16,6 +16,7 @@
                     base="{{url('/')}}"
                     create="{{route('receipts.create')}}"
                     destroy="{{route('receipts.destroy', 'replaceid')}}"
+                    @loading="handleContentLoading"
                 ></receipt-list>
 
             </div>

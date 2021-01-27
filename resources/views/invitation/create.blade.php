@@ -50,11 +50,19 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <loading-submit-button bclass="btn btn-primary" bform="create-invitation">
+                                    <loading-submit-button
+                                        bclass="btn btn-primary"
+                                        bform="create-invitation"
+                                        @loading="handleContentLoading"
+                                    >
                                         {{ __('Send') }}
                                     </loading-submit-button>
 
-                                    <loading-link bclass="btn btn-secondary" bhref="{{ route('invitations') }}">
+                                    <loading-link
+                                        bclass="btn btn-secondary"
+                                        bhref="{{ route('invitations') }}"
+                                        @loading="handleContentLoading"
+                                    >
                                         {{ __('Cancel') }}
                                     </loading-link>
 

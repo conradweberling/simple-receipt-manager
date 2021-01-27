@@ -2,7 +2,7 @@
 
     <div>
 
-        <loading-link bclass="btn btn-primary w-100" :bhref="create" oclass="w-100">
+        <loading-link bclass="btn btn-primary w-100" :bhref="create" v-on="$listeners">
             Create Receipt
         </loading-link>
 
@@ -77,10 +77,15 @@
                                                 variant="secondary"
                                                 class="float-right"
                                                 @click="$bvModal.hide('confirm-'+index)"
+                                                :disabled="disabledClose"
                                             >Close
                                             </b-button>
 
-                                            <form :id="'destroy-receipt-'+index" :action="destroy.replace('replaceid', receipt.id)" method="post">
+                                            <form
+                                                :id="'destroy-receipt-'+index"
+                                                :action="destroy.replace('replaceid', receipt.id)"
+                                                method="post"
+                                            >
 
                                                 <input name="_token" :value="csrfToken" hidden>
 
@@ -88,6 +93,8 @@
                                                     bclass="btn btn-danger float-right"
                                                     oclass="mt-2"
                                                     :bform="'destroy-receipt-'+index"
+                                                    :modal="true"
+                                                    @loading="disabledClose=true"
                                                 >
                                                     Delete
                                                 </loading-submit-button>
@@ -163,7 +170,7 @@
                 search: '',
                 loading: false,
                 loadingSearch: false,
-                loadingCreate: false,
+                disabledClose: false,
                 receipts: {},
                 responseObj: {},
                 currentPage: 1,

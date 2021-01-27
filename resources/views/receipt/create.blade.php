@@ -102,11 +102,19 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
 
-                                    <loading-submit-button bclass="btn btn-primary" bform="receipt-create">
+                                    <loading-submit-button
+                                        bclass="btn btn-primary"
+                                        bform="receipt-create"
+                                        @loading="handleContentLoading"
+                                    >
                                         {{ __('Save') }}
                                     </loading-submit-button>
 
-                                    <loading-link bclass="btn btn-secondary" bhref="{{ route('receipts') }}">
+                                    <loading-link
+                                        bclass="btn btn-secondary"
+                                        bhref="{{ route('receipts') }}"
+                                        @loading="handleContentLoading"
+                                    >
                                         {{ __('Cancel') }}
                                     </loading-link>
 

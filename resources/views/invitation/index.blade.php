@@ -11,7 +11,11 @@
                     dismissible
                 >{{ session('message') }}</b-alert>
 
-                <loading-link bclass="btn btn-primary w-100" bhref="{{ route('invitations.create') }}" oclass="w-100">
+                <loading-link
+                    bclass="btn btn-primary w-100"
+                    bhref="{{ route('invitations.create') }}"
+                    @loading="handleContentLoading"
+                >
                     New Invitation
                 </loading-link>
 

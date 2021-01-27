@@ -9,7 +9,6 @@
         </button>
     </b-overlay>
 
-
 </template>
 
 <script>
@@ -24,6 +23,9 @@
             },
             bform: {
                 required: true
+            },
+            modal: {
+                default: false
             }
         },
         data() {
@@ -37,7 +39,8 @@
                 let form = document.getElementById(this.bform);
 
                 if(form.checkValidity()) {
-                    this.loading = true;
+                    if(this.modal) this.loading = true;
+                    this.$emit('loading', true)
                     setTimeout(function(){form.submit();},50);
                 }
 
