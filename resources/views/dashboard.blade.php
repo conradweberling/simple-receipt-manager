@@ -11,7 +11,7 @@
                 dismissible
             >{{ session('message') }}</b-alert>
 
-            <dashboard route="{{route('dashboard.chart')}}"></dashboard>
+            <dashboard route="{{route('dashboard.chart')}}" @loading="handleContentLoading"></dashboard>
 
         </div>
     </div>

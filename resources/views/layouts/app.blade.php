@@ -66,7 +66,7 @@
                 </button>
                 @endauth
 
-                <a class="navbar-brand mx-auto text-center" href="{{ url('/') }}">
+                <a class="navbar-brand mx-auto text-center" href="" @mousedown="clickNavItem('{{ url('/') }}')">
                     {{ config('app.name') }}
                 </a>
 
@@ -171,9 +171,12 @@
 
         @endauth
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <b-overlay :show="loadingContent || loadingNav">
+            <main class="py-4">
+                @yield('content')
+            </main>
+        </b-overlay>
+
     </div>
 </body>
 </html>

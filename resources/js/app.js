@@ -61,7 +61,8 @@ const app = new Vue({
         return {
             newNotification: null,
             visibleNotificationSidebar: false,
-            loadingNav: false
+            loadingNav: false,
+            loadingContent: false
         }
     },
     methods: {
@@ -73,8 +74,12 @@ const app = new Vue({
             this.visibleNotificationSidebar = false;
         },
         clickNavItem(href) {
+            this.loadingContent = true;
             this.loadingNav = true;
             setTimeout(function(){document.location.href = href;},50);
+        },
+        handleContentLoading(value) {
+            this.loadingContent = value;
         },
         logoutNav() {
             this.loadingNav = true;

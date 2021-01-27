@@ -2,59 +2,56 @@
 
     <div>
 
-        <b-overlay :show="loading">
+        <div class="row mb-4 mt-2">
 
-            <div class="row mb-4 mt-2">
+            <div class="col-2">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-toggle-nav p-0" @click="clickedLeft()" :disabled="disabledLeft">
+                        <b-icon icon="chevron-left" scale="1.25"></b-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="col-8">
+                <h4 class="text-center">{{ currentData.month }}</h4>
+            </div>
+            <div class="col-2">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-toggle-nav p-0" @click="clickedRight()" :disabled="disabledRight">
+                        <b-icon icon="chevron-right" scale="1.25"></b-icon>
+                    </button>
+                </div>
+            </div>
 
-                <div class="col-2">
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-toggle-nav p-0" @click="clickedLeft()" :disabled="disabledLeft">
-                            <b-icon icon="chevron-left" scale="1.25"></b-icon>
-                        </button>
-                    </div>
+        </div>
+
+        <doughnut-chart
+            :total="currentData.total"
+            :chartData="getChartData(currentData.amounts, currentData.colors)"
+        ></doughnut-chart>
+
+        <div class="mt-5 mx-1" v-if="loaded">
+            <div class="row h-100 m-0 mb-2 align-items-center" v-for="(name, index) in currentData.names">
+
+                <div class="col-4 p-0">
+                    <svg height="30" width="60">
+                        <rect width="60" height="30" :style="'fill:'+currentData.colors[index]"/>
+                    </svg>
                 </div>
-                <div class="col-8">
-                    <h4 class="text-center">{{ currentData.month }}</h4>
+
+                <div class="col-4 p-0">
+                    <h5 class="text-center mb-0">{{ name }}</h5>
                 </div>
-                <div class="col-2">
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-toggle-nav p-0" @click="clickedRight()" :disabled="disabledRight">
-                            <b-icon icon="chevron-right" scale="1.25"></b-icon>
-                        </button>
-                    </div>
+
+                <div class="col-4 p-0">
+                    <h5 class="text-center mb-0">
+                        {{ currentData.amounts[index].toString().replace('.', ',') }}€
+                    </h5>
                 </div>
 
             </div>
 
-            <doughnut-chart
-                :total="currentData.total"
-                :chartData="getChartData(currentData.amounts, currentData.colors)"
-            ></doughnut-chart>
+        </div>
 
-            <div class="mt-5 mx-1" v-if="loaded">
-                <div class="row h-100 m-0 mb-2 align-items-center" v-for="(name, index) in currentData.names">
-
-                    <div class="col-4 p-0">
-                        <svg height="30" width="60">
-                            <rect width="60" height="30" :style="'fill:'+currentData.colors[index]"/>
-                        </svg>
-                    </div>
-
-                    <div class="col-4 p-0">
-                        <h5 class="text-center mb-0">{{ name }}</h5>
-                    </div>
-
-                    <div class="col-4 p-0">
-                        <h5 class="text-center mb-0">
-                            {{ currentData.amounts[index].toString().replace('.', ',') }}€
-                        </h5>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </b-overlay>
     </div>
 
 </template>
@@ -70,7 +67,6 @@
         },
         data() {
             return {
-                loading: false,
                 selected: 0,
                 total: 1,
                 current: 0,
@@ -122,7 +118,7 @@
             },
             loadData(selected=0) {
 
-                this.loading = true;
+                this.$emit('loading', true)
                 let self = this;
 
                 axios.get(this.route+'?page='+this.page)
@@ -143,7 +139,7 @@
                             this.loaded = true;
 
                         }
-                        self.loading = false;
+                        this.$emit('loading', false)
 
                     });
 
