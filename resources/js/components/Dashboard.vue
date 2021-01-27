@@ -1,6 +1,6 @@
 <template>
 
-    <div ontouchstart="">
+    <div>
 
         <div class="row mb-4 mt-2">
 
@@ -162,13 +162,15 @@
 
                 if(!this.loaded) {
 
-                    self.currentData = {
-                        month: moment().format("MMMM YYYY"),
-                        total: 0,
-                        amounts: [1],
-                        colors: ["#212529"],
-                        names: [""],
-                    };
+                    setTimeout(function() {
+                        self.currentData = {
+                            month: moment().format("MMMM YYYY"),
+                            total: 0,
+                            amounts: [1],
+                            colors: ["#212529"],
+                            names: [""],
+                        };
+                    },50);
 
                 }
 
