@@ -72,7 +72,6 @@
                     name="new_password_confirmation"
                     autocomplete="current-password"
                     v-model="newPasswordConfirmation"
-                    @keyup="validateNewPasswordConfirmation()"
                 />
 
                 <span v-if="!newPasswordConfirmationMatch" class="invalid-feedback" role="alert">
@@ -159,7 +158,7 @@
                     })
                     .then((response) => {
 
-                        self.alert.text = 'Password changed successfully';
+                        self.alert.text = 'Password changed successfully.';
                         self.alert.variant = 'success';
                         self.loading = false;
                         self.resetForm();
@@ -209,6 +208,18 @@
             },
             showAlert() {
                 return this.alert.text.length;
+            }
+        },
+        watch: {
+            newPassword: {
+                handler: function() {
+                    if(this.newPasswordConfirmation.length) this.validateNewPasswordConfirmation();
+                }
+            },
+            newPasswordConfirmation: {
+                handler: function() {
+                    this.validateNewPasswordConfirmation();
+                }
             }
         }
 
