@@ -13,6 +13,7 @@
 
             <b-card
                 v-for="notification in notifications"
+                v-bind:key="notification.id"
                 class="mb-4"
             >
 
