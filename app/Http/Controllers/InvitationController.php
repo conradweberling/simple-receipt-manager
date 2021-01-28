@@ -27,7 +27,8 @@ class InvitationController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|JsonResponse
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         return ($request->wantsJson()) ?
             new JsonResponse([
@@ -81,7 +82,8 @@ class InvitationController extends Controller
      * @param Invitation $invitation
      * @return \Illuminate\Contracts\Foundation\Application|JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function update(Request $request, Invitation $invitation) {
+    protected function update(Request $request, Invitation $invitation)
+    {
 
         if($invitation->user_id !== $request->user()->id)
             return ($request->wantsJson()) ?
@@ -109,7 +111,8 @@ class InvitationController extends Controller
      * @param $minutes
      * @return \Illuminate\Contracts\Foundation\Application|JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function timeout(Request $request, $minutes) {
+    protected function timeout(Request $request, $minutes)
+    {
 
         return ($request->wantsJson()) ?
             new JsonResponse([], 429) :
@@ -130,7 +133,8 @@ class InvitationController extends Controller
      * @param false $update
      * @return \Illuminate\Contracts\Foundation\Application|JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function getResult(Request $request, $success, $update=false) {
+    protected function getResult(Request $request, $success, $update=false)
+    {
 
         return ($request->wantsJson()) ?
             new JsonResponse([], ($success) ? 200 : 500) :
@@ -148,7 +152,8 @@ class InvitationController extends Controller
      *
      * @return array
      */
-    protected function validateInvitation() {
+    protected function validateInvitation()
+    {
 
         return request()->validate([
             'email' => 'required|email|unique:users'
