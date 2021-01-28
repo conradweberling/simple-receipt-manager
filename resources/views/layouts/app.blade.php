@@ -115,21 +115,21 @@
                                 </b-nav-item>
 
                                 <b-nav-item
-                                    {{ request()->is('account') ? 'active' : '' }}
-                                    @mousedown="clickNavItem('{{route('account')}}')"
-                                >
-                                    <h5 class="mb-3"><b-icon icon="person" class="mr-3" scale="1.5"></b-icon>Account</h5>
-                                </b-nav-item>
-
-                                <b-nav-item
                                     {{ request()->is('invitations') ? 'active' : '' }}
                                     @mousedown="clickNavItem('{{route('invitations')}}')"
                                 >
                                     <h5 class="mb-3"><b-icon icon="envelope" class="mr-3" scale="1.5"></b-icon>Invitations</h5>
                                 </b-nav-item>
 
+                                <b-nav-item
+                                    {{ request()->is('account') ? 'active' : '' }}
+                                    @mousedown="clickNavItem('{{route('account')}}')"
+                                >
+                                    <h5 class="mb-3 pr-4"><b-icon icon="person" class="mr-3" scale="1.8"></b-icon>Account</h5>
+                                </b-nav-item>
+
                                 <b-nav-item @click="logoutNav()">
-                                    <h5 class="mb-3"><b-icon icon="box-arrow-right" class="mr-3" scale="1.5"></b-icon>Logout</h5>
+                                    <h5 class="mb-3"><b-icon icon="box-arrow-right" class="mr-3" scale="1.4"></b-icon>Logout</h5>
                                 </b-nav-item>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
