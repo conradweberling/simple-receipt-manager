@@ -171,7 +171,7 @@
 
         @endauth
 
-        <b-overlay :show="loadingContent || loadingNav">
+        <b-overlay :show="loadingContent">
             <main class="py-4">
                 @yield('content')
             </main>
