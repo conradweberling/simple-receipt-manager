@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\AccountDeleted;
+use App\Models\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -101,5 +102,46 @@ class AccountController extends Controller
 
     }
 
+
+    /**
+     * Update email
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateEmail(Request $request)
+    {
+
+        $request->validate([
+            'email' => 'required|email|confirmed|unique:users',
+            'email_confirmation' => 'required'
+        ]);
+
+        $request->user()->email = $request->post('email');
+        $request->user()->save();
+
+        return new JsonResponse([
+            'success' => true
+        ], 200);
+
+    }
+
+
+    /**
+     * Check email
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkEmail(Request $request)
+    {
+
+        $request->validate(['email' => 'required',]);
+
+        return new JsonResponse([
+            'exists' => (User::where('email', '=', $request->post('email'))->get()->isEmpty()) ? false : true
+        ], 200);
+
+    }
 
 }

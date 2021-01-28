@@ -31,6 +31,9 @@ Route::post('/invitations', [App\Http\Controllers\InvitationController::class, '
 Route::get('/account', [App\Http\Controllers\AccountController::class, 'index'])->name('account');
 Route::post('/account/destroy', [App\Http\Controllers\AccountController::class, 'destroy'])->name('account.destroy');
 
+Route::post('/email/update', [App\Http\Controllers\AccountController::class, 'updateEmail'])->name('email.update');
+Route::post('/email/check', [App\Http\Controllers\AccountController::class, 'checkEmail'])->name('email.check');
+
 Route::get('/receipts', [App\Http\Controllers\ReceiptController::class, 'index'])->name('receipts');
 Route::get('/receipts/create', [App\Http\Controllers\ReceiptController::class, 'create'])->name('receipts.create');
 Route::post('/receipts/store', [App\Http\Controllers\ReceiptController::class, 'store'])->name('receipts.store');

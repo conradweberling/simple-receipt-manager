@@ -9,14 +9,32 @@
 
                     <div class="card-body">
 
+                        <h5 class="card-title">{{ __('Change E-Mail') }}</h5>
+
+                        <hr>
+
+                        <account-update-email-form
+                            update="{{route('email.update')}}"
+                            check="{{route('email.check')}}"
+                        ></account-update-email-form>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card mb-4">
+
+                    <div class="card-body">
+
                         <h5 class="card-title">{{ __('Change Password') }}</h5>
 
                         <hr>
 
                         <account-update-password-form
                             update="{{route('password.update')}}"
-                            check="{{route('password.check')}}">
-                        </account-update-password-form>
+                            check="{{route('password.check')}}"
+                        ></account-update-password-form>
 
                     </div>
 
@@ -41,8 +59,8 @@
 
                         <delete-account-form
                             action="{{route('account.destroy')}}"
-                            check="{{route('password.check')}}">
-                        </delete-account-form>
+                            check="{{route('password.check')}}"
+                        ></delete-account-form>
 
                     </div>
 

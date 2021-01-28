@@ -41,6 +41,7 @@ Vue.use(VueAxios, axios);
 Vue.component('invitation-list', require('./components/InvitationList').default);
 Vue.component('delete-account-form', require('./components/DeleteAccountForm').default);
 Vue.component('account-update-password-form', require('./components/AccountUpdatePasswordForm').default);
+Vue.component('account-update-email-form', require('./components/AccountUpdateEmailForm').default);
 Vue.component('receipt-list', require('./components/ReceiptList').default);
 Vue.component('notification-list', require('./components/NotificationList').default);
 Vue.component('notification-icon', require('./components/NotificationIcon').default);
@@ -74,7 +75,6 @@ const app = new Vue({
             this.visibleNotificationSidebar = false;
         },
         clickNavItem(href) {
-            this.loadingContent = true;
             this.loadingNav = true;
             setTimeout(function(){document.location.href = href;},50);
         },
