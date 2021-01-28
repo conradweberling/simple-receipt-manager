@@ -150,36 +150,40 @@
                             self.total = response.data.total;
                             self.current = self.current + response.data.perPage;
 
-                            if(selected) this.selected = selected;
+                            if(selected) self.selected = selected;
                             self.currentData = self.data[self.selected];
 
-                            this.loaded = true;
+                            self.loaded = true;
 
                         } else {
 
-                            this.loaded = false;
+                            self.loaded = false;
 
                         }
-                        
-                        this.$emit('loading', false)
+
+                        self.showEmptyChart();
+                        self.$emit('loading', false)
 
                     }).catch(() => {
 
-                        this.loaded = false;
+                        self.loaded = false;
+                        self.showEmptyChart();
+                        self.$emit('loading', false)
 
                     });
 
+            },
+            showEmptyChart() {
+
                 if(this.loaded === false) {
 
-                    setTimeout(function() {
-                        self.currentData = {
-                            month: moment().format("MMMM YYYY"),
-                            total: 0,
-                            amounts: [1],
-                            colors: ["#212529"],
-                            names: [""],
-                        };
-                    },50);
+                    this.currentData = {
+                        month: moment().format("MMMM YYYY"),
+                        total: 0,
+                        amounts: [1],
+                        colors: ["#212529"],
+                        names: [""],
+                    };
 
                 }
 
