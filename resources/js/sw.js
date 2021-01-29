@@ -1,10 +1,12 @@
 var staticCacheName = "pwa-v" + new Date().getTime();
-var filesToCache = [ //TODO change paths
-    '/srm/public/offline',
-    '/srm/public/css/app.css',
-    '/srm/public/js/app.js',
-    '/srm/public/images/icons/receipt-128x128.png',
-    '/srm/public/images/icons/receipt-512x512.png',
+var getUrl = self.location;
+var baseUrl = getUrl .protocol + "//" + getUrl.host + getUrl.pathname.replace('/sw.js', '');
+var filesToCache = [
+    baseUrl+'/offline',
+    baseUrl+'/css/app.css',
+    baseUrl+'/js/app.js',
+    baseUrl+'/images/icons/receipt-128x128.png',
+    baseUrl+'/images/icons/receipt-512x512.png',
 ];
 
 self.addEventListener("install", event => {
