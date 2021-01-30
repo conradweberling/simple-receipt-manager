@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ReceiptCreated;
-use App\Events\ReceiptDestroyed;
+use App\Events\ReceiptDeleted;
 use App\Models\Receipt;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -77,22 +77,19 @@ class ReceiptController extends Controller
     }
 
     /**
-     * Destroy receipt
+     * Delete receipt
      *
      * @param Receipt $receipt
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function destroy(Receipt $receipt, Request $request)
+    public function delete(Receipt $receipt, Request $request)
     {
-
-        $files = [storage_path('app/'.$receipt->image), storage_path('app/'.$receipt->thumbnail)];
-        foreach ($files as $file) if(is_file($file) AND strpos($file, 'dummy') === false) unlink($file);
 
         $deleted = $receipt->delete();
 
-        if($deleted) event(new ReceiptDestroyed($receipt->user_id, $receipt->date, $receipt->amount));
+        if($deleted) event(new ReceiptDeleted($receipt->user_id, $receipt->date, $receipt->amount));
 
         return ($request->wantsJson()) ?
             new JsonResponse([], ($deleted) ? 200 : 500) :

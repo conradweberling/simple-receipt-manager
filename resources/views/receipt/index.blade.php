@@ -15,7 +15,7 @@
                     route="{{route('receipts')}}"
                     base="{{url('/')}}"
                     create="{{route('receipts.create')}}"
-                    destroy="{{route('receipts.destroy', 'replaceid')}}"
+                    delete-route="{{route('receipts.delete', 'replaceid')}}"
                     @loading="handleContentLoading"
                 ></receipt-list>
 

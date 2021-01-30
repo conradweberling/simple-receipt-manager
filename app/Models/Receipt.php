@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Events\ReceiptDestroyed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Receipt extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -124,7 +126,31 @@ class Receipt extends Model
 
     }
 
+    /**
+     * Destroy deleted entries and unlink images
+     *
+     * @return bool
+     */
+    public static function destroyAll() {
 
+        $receipts = self::onlyTrashed()->where(
+            'deleted_at', '<', now()->subDays(config('app.destroy_after_days'))
+        )->get();
+
+        foreach ($receipts as $receipt) {
+
+            $files = [storage_path('app/'.$receipt->image), storage_path('app/'.$receipt->thumbnail)];
+            foreach ($files as $file) if(is_file($file) AND strpos($file, 'dummy') === false) unlink($file);
+
+            $receipt->forceDelete();
+
+            event(new ReceiptDestroyed($receipt->user_id, $receipt->date, $receipt->amount));
+
+        }
+
+        return true;
+
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

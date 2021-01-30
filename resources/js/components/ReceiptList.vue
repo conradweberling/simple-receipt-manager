@@ -82,8 +82,8 @@
                                             </b-button>
 
                                             <form
-                                                :id="'destroy-receipt-'+index"
-                                                :action="destroy.replace('replaceid', receipt.id)"
+                                                :id="'delete-receipt-'+index"
+                                                :action="deleteRoute.replace('replaceid', receipt.id)"
                                                 method="post"
                                             >
 
@@ -92,7 +92,7 @@
                                                 <loading-submit-button
                                                     bclass="btn btn-danger float-right"
                                                     oclass="mt-2"
-                                                    :bform="'destroy-receipt-'+index"
+                                                    :bform="'delete-receipt-'+index"
                                                     :modal="true"
                                                     @loading="disabledClose=true"
                                                 >
@@ -158,7 +158,7 @@
             base: {
                 required: true
             },
-            destroy: {
+            deleteRoute: {
                 required: true
             },
             create: {
