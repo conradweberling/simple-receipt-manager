@@ -7,11 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AccountDeletedNotification extends Notification
+class AccountDeletedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    const LANG_PRE = 'notifications.'.self::class.'.';
+    protected const LANG_PRE = 'notifications.'.self::class.'.';
 
     protected $name;
 
