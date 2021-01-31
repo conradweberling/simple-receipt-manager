@@ -38,7 +38,8 @@
             :chartData="getChartData(currentData.amounts, currentData.colors)"
         ></doughnut-chart>
 
-        <div class="mt-5 mx-1" v-if="loaded === true">
+        <div class="mt-5 mb-3 mx-1" v-if="loaded === true">
+
             <div class="row h-100 m-0 mb-2 align-items-center" v-for="(name, index) in currentData.names">
 
                 <div class="col-4 p-0">
@@ -55,6 +56,31 @@
                     <h5 class="text-center mb-0">
                         {{ currentData.amounts[index].toString().replace('.', ',') }}€
                     </h5>
+                </div>
+
+            </div>
+
+            <div class="my-5" v-if="currentData.payments.length">
+
+                <div
+                    class="row h-100 m-0 mb-2 align-items-center"
+                    v-for="payment in currentData.payments"
+                >
+
+                    <div class="col-4 p-0">
+                        <h5 class="text-center mb-0">{{ payment.sender }}</h5>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="arrow-head text-center">
+                            <span class="arrow-text">{{ payment.sum }}€</span>
+                        </div>
+                    </div>
+
+                    <div class="col-4 p-0">
+                        <h5 class="text-center mb-0">{{ payment.recipient }}</h5>
+                    </div>
+
                 </div>
 
             </div>
@@ -80,7 +106,7 @@
                 total: 1,
                 current: 0,
                 page: 1,
-                perPage: 6,
+                perPage: 3,
                 loaded: null,
                 currentData: {},
                 data: [

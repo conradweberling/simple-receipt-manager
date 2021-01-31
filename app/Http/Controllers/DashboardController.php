@@ -49,7 +49,7 @@ class DashboardController extends Controller
         ]);
 
         $page = ($request->get('page')) ?: 1;
-        $perPage = ($request->get('perPage')) ?: 6;
+        $perPage = ($request->get('perPage')) ?: 3;
 
         $result->total = Receipt::monthCount();
         $months = Receipt::months(
@@ -92,6 +92,8 @@ class DashboardController extends Controller
             array_push($obj->names, $sum['name']);
             array_push($obj->colors, $sum['color']);
         }
+
+        $obj->payments = Receipt::calcPayments($obj->total, $obj->amounts, $obj->names);
 
         cache([$month => $obj], now()->addYear());
 

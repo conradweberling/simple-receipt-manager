@@ -31,7 +31,8 @@ class Receipt extends Model
      * @param $q
      * @return mixed
      */
-    public static function paginateAndSearch($q) {
+    public static function paginateAndSearch($q)
+    {
 
         return self
             ::select(
@@ -59,7 +60,8 @@ class Receipt extends Model
      * @param int $take
      * @return array
      */
-    public static function months($skip=0, $take=6) {
+    public static function months($skip=0, $take=6)
+    {
 
         $months = Receipt::select(DB::raw('DATE_FORMAT(date, "%Y-%m") as date'))
             ->distinct('date')
@@ -77,7 +79,8 @@ class Receipt extends Model
      *
      * @return mixed
      */
-    public static function monthCount() {
+    public static function monthCount()
+    {
 
         $months = Receipt::select(DB::raw('DATE_FORMAT(date, "%Y-%m") as date'))
             ->distinct('date')
@@ -94,7 +97,8 @@ class Receipt extends Model
      * @param $month
      * @return false
      */
-    public static function sumUserAmountByMonth($month) {
+    public static function sumUserAmountByMonth($month)
+    {
 
         $rows = Receipt::select(['users.name', 'users.color', DB::raw('ROUND(SUM(receipts.amount), 2) AS sum')])
             ->join('users', 'users.id', '=', 'receipts.user_id')
@@ -107,15 +111,14 @@ class Receipt extends Model
 
     }
 
-
-
     /**
      *
      *
      * @param $month
      * @return false
      */
-    public static function sumAmountByMonth($month) {
+    public static function sumAmountByMonth($month)
+    {
 
         $rows = Receipt::select(DB::raw('ROUND(SUM(receipts.amount), 2) AS total'))
             ->where('receipts.date', 'LIKE', $month.'%')
@@ -127,11 +130,106 @@ class Receipt extends Model
     }
 
     /**
+     * Calculate compensation payments
+     *
+     * @param $total
+     * @param $amounts
+     * @param $names
+     * @return array
+     */
+    public static function calcPayments($total, $amounts, $names)
+    {
+
+        $calc_result = [];
+        $senders = [];
+        $recipients = [];
+
+        $average = $total / count($amounts);
+
+        $fi = 0;
+        foreach ($amounts as $amount) {
+
+            $needed = $average - $amount;
+            $person = ['name' => $names[$fi], 'amount' => $needed];
+
+            if($needed < 0) array_push($recipients, $person);
+            elseif($needed !== 0) array_push($senders, $person);
+
+            $fi++;
+
+        }
+
+        if(!$senders OR !$recipients) return [];
+
+        usort($senders, function ($a, $b) {
+            return ( $a['amount'] < $b['amount']) ? 1 : -1;
+        });
+
+        usort($recipients, function ($a, $b) {
+            return ($a['amount'] > $b['amount']) ? -1 : 1;
+        });
+
+        while(count($senders)) {
+
+            $sender_key = array_key_first($senders);
+            $sender_name = $senders[$sender_key]['name'];
+
+            $recipient_key = array_key_first($recipients);
+            $recipient_name = $recipients[$recipient_key]['name'];
+
+            $pre_sum = round($recipients[$recipient_key]['amount'] + $senders[$sender_key]['amount'], 2);
+
+            if($pre_sum < -0.01) {
+
+                $recipients[$recipient_key]['amount'] = $pre_sum;
+                $final_sum = $senders[$sender_key]['amount'];
+                unset($senders[$sender_key]);
+
+            } elseif($pre_sum > 0.01) {
+
+                $diff_sum = round($senders[$sender_key]['amount'] - abs($recipients[$recipient_key]['amount']), 2);
+
+                if($diff_sum) {
+                    $final_sum = $senders[$sender_key]['amount'] - $diff_sum;
+                    $senders[$sender_key]['amount'] = $diff_sum;
+                } else {
+                    $final_sum = $senders[$sender_key]['amount'];
+                    unset($senders[$sender_key]);
+                }
+
+                unset($recipients[$recipient_key]);
+
+            } else {
+
+                $final_sum = $senders[$sender_key]['amount'];
+                unset($senders[$sender_key]);
+                unset($recipients[$recipient_key]);
+
+            }
+
+            if($final_sum) {
+
+                array_push($calc_result, [
+                    'sender' => $sender_name,
+                    'sum' => round($final_sum, 2),
+                    'recipient' => $recipient_name,
+                ]);
+
+            }
+
+        }
+
+        return $calc_result;
+
+    }
+
+    /**
      * Destroy deleted entries and unlink images
      *
      * @return bool
      */
-    public static function destroyAll() {
+    public static function destroyAll()
+    {
 
         $receipts = self::onlyTrashed()->where(
             'deleted_at', '<', now()->subDays(config('app.destroy_after_days'))
@@ -155,7 +253,8 @@ class Receipt extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users() {
+    public function users()
+    {
 
         return $this->belongsTo(Receipt::class);
 
