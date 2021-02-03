@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Receipt;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -57,9 +58,11 @@ class DashboardController extends Controller
             $perPage
         );
 
+        $users = User::select('id')->get()->pluck('id')->toArray();
         foreach ($months as $month) {
 
-            $obj = (cache($month)) ?: $this->getMonthObjFromDb($month);
+            $obj = (/*cache($month)*/false) ?: $this->getMonthObjFromDb($month, $users);
+
             $result->data[] = $obj;
 
         }
@@ -72,10 +75,11 @@ class DashboardController extends Controller
      * Get chart obj from db
      *
      * @param $month
+     * @param $users
      * @return stdClass
      * @throws \Exception
      */
-    protected function getMonthObjFromDb($month)
+    protected function getMonthObjFromDb($month, $users)
     {
 
         $obj = new StdClass();
@@ -87,10 +91,10 @@ class DashboardController extends Controller
         $obj->names = [];
         $obj->colors = [];
 
-        foreach(Receipt::sumUserAmountByMonth($month) as $sum) {
-            array_push($obj->amounts, $sum['sum']);
-            array_push($obj->names, $sum['name']);
-            array_push($obj->colors, $sum['color']);
+        foreach(Receipt::sumUserAmountByMonth($month, $users) as $user) {
+            array_push($obj->amounts, $user['sum']);
+            array_push($obj->names, $user['name']);
+            array_push($obj->colors, $user['color']);
         }
 
         $obj->payments = Receipt::calcPayments($obj->total, $obj->amounts, $obj->names);

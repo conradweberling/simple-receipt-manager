@@ -92,22 +92,50 @@ class Receipt extends Model
     }
 
     /**
-     *
+     * Fetches all user receipts cost per month
      *
      * @param $month
-     * @return false
+     * @param $users
+     * @return mixed
      */
-    public static function sumUserAmountByMonth($month)
+    public static function sumUserAmountByMonth($month, $users)
     {
 
-        $rows = Receipt::select(['users.name', 'users.color', DB::raw('ROUND(SUM(receipts.amount), 2) AS sum')])
+        $results = [];
+
+        $rows = Receipt::select([
+                'users.id',
+                'users.name',
+                'users.color',
+                DB::raw('ROUND(SUM(receipts.amount), 2) AS sum')
+            ])
             ->join('users', 'users.id', '=', 'receipts.user_id')
             ->where('receipts.date', 'LIKE', $month.'%')
             ->groupBy([DB::raw('DATE_FORMAT(receipts.date, "%Y-%m")'), 'receipts.user_id'])
             ->orderBy('sum', 'desc')
             ->get();
 
-        return ($rows) ? $rows->all() : false;
+        if($rows) {
+
+            $results = $rows->all();
+
+            foreach ($results as $row) {
+                $index = array_search($row['id'], $users);
+                if($index !== false) unset($users[$index]);
+            }
+
+            foreach ($users as $id) {
+                $user = User::find($id);
+                array_push($results, [
+                    'name' => $user->name,
+                    'color' => $user->color,
+                    'sum' => 0
+                ]);
+            }
+
+        }
+
+        return ($results) ?: false;
 
     }
 
