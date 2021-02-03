@@ -30,7 +30,8 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendWelcomeNotification::class,
             SendAcceptedNotification::class,
-            DeleteInvitation::class
+            DeleteInvitation::class,
+            ClearGlobalCache::class
         ],
         AccountDeleted::class => [
             SendAccountDeletedMail::class,
