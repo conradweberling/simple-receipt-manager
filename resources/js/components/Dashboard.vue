@@ -73,7 +73,7 @@
 
                     <div class="col-4">
                         <div class="arrow-head text-center">
-                            <span class="arrow-text">{{ payment.sum }}€</span>
+                            <span class="arrow-text">{{ payment.sum.toString().replace('.', ',') }}€</span>
                         </div>
                     </div>
 
