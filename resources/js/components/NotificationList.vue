@@ -78,7 +78,7 @@ export default {
 
                 this.loading = true;
 
-                this.axios.get(this.route)
+                axios.get(this.route)
                     .then(response => {
 
                         if(this.error) this.error = false;
@@ -99,14 +99,14 @@ export default {
             },
             updateNotifications() {
 
-                this.axios.post(this.update);
+                axios.post(this.update);
 
             },
             destroyNotification(id) {
 
                 this.loading = true;
 
-                this.axios.post(this.destroy.replace('replaceid', id))
+                axios.post(this.destroy.replace('replaceid', id))
                     .then(response => {
 
                         let key = this.notifications.findIndex( x => x.id === id );

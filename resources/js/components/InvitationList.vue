@@ -77,7 +77,7 @@ export default {
     },
     mounted() {
 
-        this.axios.get(this.route).then((response) => {
+        axios.get(this.route).then((response) => {
 
             this.requested = true;
             this.items = response.data.items;

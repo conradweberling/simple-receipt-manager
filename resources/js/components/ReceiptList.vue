@@ -150,7 +150,11 @@
 </template>
 
 <script>
+    import { BIconTrash } from 'bootstrap-vue'
     export default {
+        components: {
+            BIconTrash
+        },
         props: {
             route: {
                 required: true
@@ -206,7 +210,7 @@
                     this.loading = true;
                 }
 
-                this.axios.get(
+                axios.get(
                         this.route +
                         '?page=' + page +
                         '&q=' + this.search.replace(',', '.').replace('€', ''))

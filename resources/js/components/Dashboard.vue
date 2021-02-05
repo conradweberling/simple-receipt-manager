@@ -93,8 +93,12 @@
 
 <script>
     import moment from 'moment';
+    import { BIconChevronLeft, BIconChevronRight } from 'bootstrap-vue';
     export default {
-
+        components: {
+            BIconChevronLeft,
+            BIconChevronRight
+        },
         props: {
             route: {
                 required: true,

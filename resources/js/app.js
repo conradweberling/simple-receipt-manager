@@ -4,28 +4,26 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-//require('./bootstrap');
+require('./bootstrap');
 
 window.Vue = require('vue').default;
 
 /**
  * Bootstrap Vue
  */
-require('./bootstrap');
-
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import {
+    BootstrapVue, BIcon, BIconBoxArrowRight, BIconPerson, BIconEnvelope, BIconReceipt, BIconBarChart, BIconList
+} from 'bootstrap-vue';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
-
-/**
- * Axios
- */
-import axios from 'axios';
-import VueAxios from 'vue-axios';
-
-Vue.use(VueAxios, axios);
+Vue.component('BIcon', BIcon);
+Vue.component('BIconBoxArrowRight', BIconBoxArrowRight);
+Vue.component('BIconPerson', BIconPerson);
+Vue.component('BIconEnvelope', BIconEnvelope);
+Vue.component('BIconReceipt', BIconReceipt);
+Vue.component('BIconBarChart', BIconBarChart);
+Vue.component('BIconList', BIconList);
 
 /**
  * The following block of code may be used to automatically register your

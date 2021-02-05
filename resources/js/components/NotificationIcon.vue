@@ -16,7 +16,13 @@
 </template>
 
 <script>
+    import { BIconstack, BIconBell, BIconExclamationCircleFill } from 'bootstrap-vue'
     export default {
+        components: {
+            BIconstack,
+            BIconBell,
+            BIconExclamationCircleFill
+        },
         props: {
             default: {
                 required: true
