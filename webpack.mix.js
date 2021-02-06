@@ -1,4 +1,20 @@
 const mix = require('laravel-mix');
+const webpack = require('webpack');
+
+/*
+ |--------------------------------------------------------------------------
+ | Custom Mix setup
+ |--------------------------------------------------------------------------
+ |
+ */
+mix.webpackConfig({
+    plugins: [
+        new webpack.ContextReplacementPlugin(
+            /moment[\/\\]locale/,
+            /(en-gb)\.js/
+        )
+    ]
+});
 
 /*
  |--------------------------------------------------------------------------
