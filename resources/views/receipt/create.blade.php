@@ -32,6 +32,7 @@
                                         drop-placeholder="Drop file here..."
                                         @if(old('image')) value="{{ old('image') }}" @endif
                                         class="@error('image') is-invalid @enderror"
+                                        accept="image/jpeg, image/png"
                                         required
                                         autofocus
                                     ></b-form-file>
