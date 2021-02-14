@@ -5,7 +5,7 @@
 
         <div class="col-md-6">
 
-            <b-overlay :show="loading" class="d-inline-block" spinner-small>
+            <b-overlay :show="loading" class="d-inline-block w-100" spinner-small>
                 <b-form-file
                     id="image-select"
                     ref="imageselect"
