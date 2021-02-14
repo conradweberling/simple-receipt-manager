@@ -46,8 +46,11 @@
 
 <script>
 import moment from 'moment';
-
+import { BIconTrash } from 'bootstrap-vue'
 export default {
+        components: {
+            BIconTrash
+        },
         props: {
             route: {
                 required: true
