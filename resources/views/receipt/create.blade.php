@@ -20,30 +20,10 @@
                         <form id="receipt-create" method="POST" action="{{ route('receipts.store') }}" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="form-group row">
-                                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Receipt') }}</label>
-
-                                <div class="col-md-6">
-
-                                    <b-form-file
-                                        id="image"
-                                        name="image"
-                                        placeholder="Choose a file or drop it here..."
-                                        drop-placeholder="Drop file here..."
-                                        @if(old('image')) value="{{ old('image') }}" @endif
-                                        class="@error('image') is-invalid @enderror"
-                                        accept="image/jpeg, image/png"
-                                        required
-                                        autofocus
-                                    ></b-form-file>
-
-                                    @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            <store-image
+                                route="{{route('images.store')}}"
+                                @error('image') error="{{ $message }}" @enderror
+                            ></store-image>
 
                             <div class="form-group row">
                                 <label for="date" class="col-md-4 col-form-label text-md-right">{{ __('Date') }}</label>

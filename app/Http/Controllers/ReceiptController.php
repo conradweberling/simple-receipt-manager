@@ -7,7 +7,6 @@ use App\Events\ReceiptDeleted;
 use App\Models\Receipt;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 
 class ReceiptController extends Controller
 {
@@ -55,12 +54,10 @@ class ReceiptController extends Controller
     {
         $this->validateForm($request);
 
-        $image_path = $this->storeImage($request);
-
         Receipt::create([
             'user_id' => $request->user()->id,
-            'image' => $image_path,
-            'thumbnail' => $this->createThumbByImage($image_path),
+            'image' => $request->post('image'),
+            'thumbnail' => $request->post('thumbnail'),
             'date' => $request->post('date'),
             'amount' => $request->post('amount')
         ]);
@@ -109,49 +106,13 @@ class ReceiptController extends Controller
     {
 
         $request->validate([
-            'image' => 'required|mimes:jpeg,png',
+            'image' => 'required',
+            'thumbnail' => 'required',
             'date'  => 'required|date',
             'amount' => 'required|regex:/^\d+(\.\d{1,2})?$/'
         ]);
 
     }
 
-    /**
-     * Store image
-     *
-     * @param Request $request
-     * @return string
-     */
-    protected function storeImage(Request $request)
-    {
-
-        $image = Image::make($request->file('image')->getRealpath());
-        $image->orientate();
-        $image_ext = request('image')->getClientOriginalExtension();
-        $image_sub_path = 'images/'.uniqid().'.'.$image_ext;
-        $image_path = storage_path('app/'.$image_sub_path);
-        $image->save($image_path);
-
-        return $image_sub_path;
-
-    }
-
-    /**
-     * Generate Thumbnail
-     *
-     * @param $image_path
-     * @return string
-     */
-    protected function createThumbByImage($image_path)
-    {
-
-        $thumb = Image::make(storage_path('app/'.$image_path));
-        $thumb->fit(config('view.thumbnail_width'), config('view.thumbnail_height'));
-        $thumb_path = 'images/'.$thumb->filename.'.thumbnail.'.$thumb->extension;
-        $thumb->save(storage_path('app/'.$thumb_path));
-
-        return $thumb_path;
-
-    }
 
 }
