@@ -51,8 +51,8 @@ class AccountController extends Controller
 
         event(new AccountDeleted($user->name, $user->email));
 
-        $user->delete();
         auth()->guard()->logout();
+        $user->delete();
 
         return $request->wantsJson() ?
             new JsonResponse([], 200) :
