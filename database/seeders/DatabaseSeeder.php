@@ -17,12 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        User::factory()->create([
-            'name' => 'Max',
-            'email' => 'max@example.net',
-            'password' => '$2y$10$17oQb9TW1gNaHqawehrjWu5gGYsz7JsgxmW8qHLmhLKEXimg0So46'
-        ]);
-
+        User::addDemoUser();
         User::factory(2)->create();
 
         Receipt::factory(500)->create();

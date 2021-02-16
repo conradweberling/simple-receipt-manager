@@ -87,4 +87,18 @@ class User extends Authenticatable
 
     }
 
+    /**
+     * Add demo user
+     */
+    public static function addDemoUser() {
+
+        User::factory()->create([
+            'name' => 'Max',
+            'email' => 'max@example.net',
+            'password' => '$2y$10$17oQb9TW1gNaHqawehrjWu5gGYsz7JsgxmW8qHLmhLKEXimg0So46',
+            'color' => '#39e262'
+        ]);
+
+    }
+
 }
