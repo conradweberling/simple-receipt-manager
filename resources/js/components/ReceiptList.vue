@@ -136,6 +136,7 @@
                     :total-rows="totalRows"
                     :per-page="perPage"
                     align="center"
+                    @change="handlePag"
                 ></b-pagination>
 
             </div>
@@ -234,6 +235,14 @@
 
                     });
 
+            },
+            handlePag(page) {
+                if(!this.loadingSearch) {
+                    this.getResults(page);
+                    setTimeout(function () {
+                        window.scroll(0,0);
+                    },2);
+                }
             }
         },
         computed: {
@@ -254,16 +263,6 @@
             },
             showAlert() {
                 return !!(this.alert.text.length);
-            }
-        },
-        watch: {
-            currentPage: {
-                handler: function(value) {
-                    if(!this.loadingSearch) {
-                        this.getResults(value);
-                        window.scroll(0,0);
-                    }
-                }
             }
         }
 
