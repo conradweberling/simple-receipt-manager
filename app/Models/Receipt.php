@@ -49,7 +49,7 @@ class Receipt extends Model
             ->orWhere('users.name', 'LIKE', '%'.$q.'%')
             ->orderBy('receipts.date', 'desc')
             ->orderBy('receipts.created_at', 'desc')
-            ->paginate(3);
+            ->paginate(5);
 
     }
 
